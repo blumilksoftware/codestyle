@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  php:
+    image: ghcr.io/blumilksoftware/php:8.0.1.1
+    container_name: blumilk-codestyle-php
+    working_dir: /application
+    user: ${CURRENT_UID}
+    volumes:
+      - .:/application

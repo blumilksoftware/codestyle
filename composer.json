@@ -1,0 +1,25 @@
+{
+  "name": "blumilksoftware/codestyle",
+  "description": "Blumilk codestyle configurator",
+  "type": "library",
+  "require": {
+    "php": "^8.0",
+    "symplify/easy-coding-standard": "^9.1"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Krzysztof Rewak",
+      "email": "krzysztof.rewak@blumilk.pl"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Blumilk\\Codestyle\\": "src/"
+    }
+  }
+}
