@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Blumilk\Codestyle\Fixers;
 
 use PhpCsFixer\AbstractFixer;
@@ -39,8 +41,8 @@ EOF;
 
             $content = $token->getContent();
             if (
-                "'" === $content[0] &&
-                false === strpos($content, '"') &&
+                $content[0] === "'" &&
+                !str_contains($content, '"') &&
                 // regex: odd number of backslashes, not followed by double quote or dollar
                 !preg_match("/(?<!\\\\)(?:\\\\{2})*\\\\(?!['$\\\\])/", $content)
             ) {

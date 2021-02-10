@@ -13,7 +13,9 @@ class CommonAdditionalRules implements AdditionalRules
 {
     protected array $rules = [
         DeclareStrictTypesFixer::class => null,
-        CastSpacesFixer::class => ["space" => "none"],
+        CastSpacesFixer::class => [
+            "space" => "none",
+        ],
         DoubleQuoteFixer::class => null,
     ];
 
