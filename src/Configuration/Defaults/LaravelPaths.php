@@ -8,7 +8,7 @@ use Blumilk\Codestyle\Configuration\Paths;
 
 class LaravelPaths implements Paths
 {
-    protected array $paths = ["app", "config", "database", "resources/lang", "routes"];
+    protected array $paths = ["app", "config", "database", "resources/lang", "routes", "tests"];
 
     public function get(): array
     {
