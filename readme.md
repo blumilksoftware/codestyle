@@ -58,7 +58,7 @@ return $config->config();
 ```
 
 #### Usage with Composer
-Add script to your `compsoer.json` file:
+Add script to your `composer.json` file:
 ```json
 "scripts": {
   "ecs": "./vendor/bin/ecs check"
