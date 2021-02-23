@@ -23,7 +23,9 @@ class Paths implements PathsContract
     public function add(string ...$paths): self
     {
         foreach ($paths as $path) {
-            $this->paths[] = $path;
+            if (!in_array($path, $this->paths, true)) {
+                $this->paths[] = $path;
+            }
         }
 
         return $this;
