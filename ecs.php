@@ -3,17 +3,12 @@
 declare(strict_types=1);
 
 use Blumilk\Codestyle\Config;
-use Blumilk\Codestyle\Configuration\Paths;
+use Blumilk\Codestyle\Configuration\Defaults\Paths;
 
-$paths = new class() implements Paths {
-    public function get(): array
-    {
-        return ["src", "tests"];
-    }
-};
+$paths = new Paths();
 
 $config = new Config(
-    paths: $paths
+    paths: $paths->add("src", "tests")
 );
 
 return $config->config();
