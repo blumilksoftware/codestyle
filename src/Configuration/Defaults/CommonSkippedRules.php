@@ -11,7 +11,7 @@ use PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer;
 use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 
-class CommonSkippedRules implements SkippedRules
+class CommonSkippedRules extends Rules implements SkippedRules
 {
     protected array $rules = [
         SingleQuoteFixer::class => null,
@@ -20,9 +20,4 @@ class CommonSkippedRules implements SkippedRules
         ReturnAssignmentFixer::class => null,
         BinaryOperatorSpacesFixer::class => null,
     ];
-
-    public function get(): array
-    {
-        return $this->rules;
-    }
 }

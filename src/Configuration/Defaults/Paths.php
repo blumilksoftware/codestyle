@@ -46,6 +46,8 @@ class Paths implements PathsContract
             }
         }
 
+        $this->paths = array_values($this->paths);
+
         return $this;
     }
 }

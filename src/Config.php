@@ -12,6 +12,7 @@ use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\SetLists;
 use Blumilk\Codestyle\Configuration\SkippedRules;
+use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator as Container;
 use Symplify\EasyCodingStandard\ValueObject\Option;
@@ -57,5 +58,21 @@ class Config
                 }
             }
         };
+    }
+
+    #[ArrayShape([
+        "paths" => "array",
+        "sets" => "array",
+        "skipped" => "array",
+        "rules" => "array",
+    ])]
+    public function options(): array
+    {
+        return [
+            "paths" => $this->paths->get(),
+            "sets" => $this->sets->get(),
+            "skipped" => $this->skipped->get(),
+            "rules" => $this->rules->get(),
+        ];
     }
 }
