@@ -39,10 +39,7 @@ class Config
 
     public function config(): callable
     {
-        $paths = $this->paths->get();
-        $sets = $this->sets->get();
-        $skipped = $this->skipped->get();
-        $rules = $this->rules->get();
+        list("paths" => $paths, "sets" => $sets, "skipped" => $skipped, "rules" => $rules) = $this->options();
 
         return static function (Container $container) use ($sets, $skipped, $rules, $paths): void {
             $parameters = $container->parameters();
