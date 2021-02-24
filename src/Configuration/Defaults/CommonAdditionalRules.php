@@ -9,7 +9,7 @@ use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 
-class CommonAdditionalRules implements AdditionalRules
+class CommonAdditionalRules extends Rules implements AdditionalRules
 {
     protected array $rules = [
         DeclareStrictTypesFixer::class => null,
@@ -18,9 +18,4 @@ class CommonAdditionalRules implements AdditionalRules
         ],
         DoubleQuoteFixer::class => null,
     ];
-
-    public function get(): array
-    {
-        return $this->rules;
-    }
 }

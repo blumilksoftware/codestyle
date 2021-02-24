@@ -23,6 +23,11 @@
     }
   },
   "scripts": {
-    "ecs": "./vendor/bin/ecs check"
+    "ecs": "./vendor/bin/ecs check",
+    "ecs-fix": "./vendor/bin/ecs check --fix",
+    "test": "./vendor/bin/phpunit tests"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
   }
 }
