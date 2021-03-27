@@ -6,8 +6,8 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 
 use Blumilk\Codestyle\Configuration\AdditionalRules;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
-use PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
