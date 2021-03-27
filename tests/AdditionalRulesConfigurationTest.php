@@ -96,14 +96,12 @@ class AdditionalRulesConfigurationTest extends TestCase
     public function testExtendingWithOptionsAdditionalRulesConfiguration(): void
     {
         $rules = new CommonAdditionalRules();
+        $rule = new Rule(NoMixedEchoPrintFixer::class, [
+            "use" => "echo",
+        ]);
+
         $config = new Config(
-            rules: $rules->add(
-            new Rule(
-                NoMixedEchoPrintFixer::class, [
-                "use" => "echo",
-            ]
-            )
-        )
+            rules: $rules->add($rule)
         );
 
         $this->assertSame(
