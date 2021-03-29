@@ -6,8 +6,13 @@ use Blumilk\Codestyle\Config;
 use Blumilk\Codestyle\Configuration\Defaults\CommonAdditionalRules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
+use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
+use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
+use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
+use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\StringNotation\HeredocToNowdocFixer;
 use PHPUnit\Framework\TestCase;
@@ -19,13 +24,21 @@ class AdditionalRulesConfigurationTest extends TestCase
         $rules = new CommonAdditionalRules();
         $config = new Config(rules: $rules);
 
-        $this->assertSame([
-            DeclareStrictTypesFixer::class => null,
-            CastSpacesFixer::class => [
-                "space" => "none",
+        $this->assertSame(
+            [
+                DeclareStrictTypesFixer::class => null,
+                CastSpacesFixer::class => [
+                    "space" => "none",
+                ],
+                DoubleQuoteFixer::class => null,
+                VoidReturnFixer::class => null,
+                UseArrowFunctionsFixer::class => null,
+                NoSpacesAfterFunctionNameFixer::class => null,
+                FullyQualifiedStrictTypesFixer::class => null,
+                OrderedImportsFixer::class => null,
             ],
-            DoubleQuoteFixer::class => null,
-        ], $config->options()["rules"]);
+            $config->options()["rules"]
+        );
     }
 
     public function testClearingAdditionalRulesConfiguration(): void
@@ -41,10 +54,18 @@ class AdditionalRulesConfigurationTest extends TestCase
         $rules = new CommonAdditionalRules();
         $config = new Config(rules: $rules->filter(CastSpacesFixer::class));
 
-        $this->assertSame([
-            DeclareStrictTypesFixer::class => null,
-            DoubleQuoteFixer::class => null,
-        ], $config->options()["rules"]);
+        $this->assertSame(
+            [
+                DeclareStrictTypesFixer::class => null,
+                DoubleQuoteFixer::class => null,
+                VoidReturnFixer::class => null,
+                UseArrowFunctionsFixer::class => null,
+                NoSpacesAfterFunctionNameFixer::class => null,
+                FullyQualifiedStrictTypesFixer::class => null,
+                OrderedImportsFixer::class => null,
+            ],
+            $config->options()["rules"]
+        );
     }
 
     public function testExtendingAdditionalRulesConfiguration(): void
@@ -54,34 +75,52 @@ class AdditionalRulesConfigurationTest extends TestCase
             rules: $rules->add(new Rule(HeredocToNowdocFixer::class))
         );
 
-        $this->assertSame([
-            DeclareStrictTypesFixer::class => null,
-            CastSpacesFixer::class => [
-                "space" => "none",
+        $this->assertSame(
+            [
+                DeclareStrictTypesFixer::class => null,
+                CastSpacesFixer::class => [
+                    "space" => "none",
+                ],
+                DoubleQuoteFixer::class => null,
+                VoidReturnFixer::class => null,
+                UseArrowFunctionsFixer::class => null,
+                NoSpacesAfterFunctionNameFixer::class => null,
+                FullyQualifiedStrictTypesFixer::class => null,
+                OrderedImportsFixer::class => null,
+                HeredocToNowdocFixer::class => null,
             ],
-            DoubleQuoteFixer::class => null,
-            HeredocToNowdocFixer::class => null,
-        ], $config->options()["rules"]);
+            $config->options()["rules"]
+        );
     }
 
     public function testExtendingWithOptionsAdditionalRulesConfiguration(): void
     {
         $rules = new CommonAdditionalRules();
+        $rule = new Rule(NoMixedEchoPrintFixer::class, [
+            "use" => "echo",
+        ]);
+
         $config = new Config(
-            rules: $rules->add(new Rule(NoMixedEchoPrintFixer::class, [
-                "use" => "echo",
-            ]))
+            rules: $rules->add($rule)
         );
 
-        $this->assertSame([
-            DeclareStrictTypesFixer::class => null,
-            CastSpacesFixer::class => [
-                "space" => "none",
+        $this->assertSame(
+            [
+                DeclareStrictTypesFixer::class => null,
+                CastSpacesFixer::class => [
+                    "space" => "none",
+                ],
+                DoubleQuoteFixer::class => null,
+                VoidReturnFixer::class => null,
+                UseArrowFunctionsFixer::class => null,
+                NoSpacesAfterFunctionNameFixer::class => null,
+                FullyQualifiedStrictTypesFixer::class => null,
+                OrderedImportsFixer::class => null,
+                NoMixedEchoPrintFixer::class => [
+                    "use" => "echo",
+                ],
             ],
-            DoubleQuoteFixer::class => null,
-            NoMixedEchoPrintFixer::class => [
-                "use" => "echo",
-            ],
-        ], $config->options()["rules"]);
+            $config->options()["rules"]
+        );
     }
 }
