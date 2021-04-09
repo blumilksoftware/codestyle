@@ -16,8 +16,8 @@ class BinaryOperatorSpacesFixer extends FixerWorkaround
 
     public function __construct()
     {
-        parent::__construct();
         $this->fixer = new BaseBinaryOperatorSpacesFixer();
+        parent::__construct();
     }
 
     protected function getFixer(): BaseBinaryOperatorSpacesFixer
@@ -30,11 +30,11 @@ class BinaryOperatorSpacesFixer extends FixerWorkaround
         $this->tokensAnalyzer = new TokensAnalyzer($tokens);
 
         for ($index = $tokens->count() - 2; $index > 0; --$index) {
-            if (!$this->tokensAnalyzer->isBinaryOperator($index)) {
+            if ($tokens[$index]->getContent() === "|" && $tokens[$index]->getId() === CT::T_TYPE_ALTERNATION) {
                 continue;
             }
 
-            if ($tokens[$index]->getContent() === "|" && $tokens[$index]->getId() === CT::T_TYPE_ALTERNATION) {
+            if (!$this->tokensAnalyzer->isBinaryOperator($index)) {
                 continue;
             }
 

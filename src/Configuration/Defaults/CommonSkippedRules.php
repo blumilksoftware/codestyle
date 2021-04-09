@@ -6,6 +6,7 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 
 use Blumilk\Codestyle\Configuration\SkippedRules;
 use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
+use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer;
 use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
@@ -17,5 +18,6 @@ class CommonSkippedRules extends Rules implements SkippedRules
         ClassAttributesSeparationFixer::class => null,
         NotOperatorWithSuccessorSpaceFixer::class => null,
         ReturnAssignmentFixer::class => null,
+        BinaryOperatorSpacesFixer::class => null,
     ];
 }

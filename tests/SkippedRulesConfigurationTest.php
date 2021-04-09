@@ -7,6 +7,7 @@ use Blumilk\Codestyle\Configuration\Defaults\CommonSkippedRules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
+use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\LogicalOperatorsFixer;
 use PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer;
 use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
@@ -26,6 +27,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 ClassAttributesSeparationFixer::class => null,
                 NotOperatorWithSuccessorSpaceFixer::class => null,
                 ReturnAssignmentFixer::class => null,
+                BinaryOperatorSpacesFixer::class => null,
             ],
             $config->options()["skipped"]
         );
@@ -48,6 +50,7 @@ class SkippedRulesConfigurationTest extends TestCase
             [
                 ClassAttributesSeparationFixer::class => null,
                 NotOperatorWithSuccessorSpaceFixer::class => null,
+                BinaryOperatorSpacesFixer::class => null,
             ],
             $config->options()["skipped"]
         );
@@ -66,6 +69,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 ClassAttributesSeparationFixer::class => null,
                 NotOperatorWithSuccessorSpaceFixer::class => null,
                 ReturnAssignmentFixer::class => null,
+                BinaryOperatorSpacesFixer::class => null,
                 LogicalOperatorsFixer::class => null,
             ],
             $config->options()["skipped"]
@@ -85,6 +89,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 ClassAttributesSeparationFixer::class => null,
                 NotOperatorWithSuccessorSpaceFixer::class => null,
                 ReturnAssignmentFixer::class => null,
+                BinaryOperatorSpacesFixer::class => null,
                 ArraySyntaxFixer::class => [__DIR__ . "/test"],
             ],
             $config->options()["skipped"]

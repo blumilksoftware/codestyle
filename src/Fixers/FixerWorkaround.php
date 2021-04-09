@@ -13,13 +13,27 @@ use SplFileInfo;
 
 abstract class FixerWorkaround extends AbstractFixer
 {
+    protected ReflectionClass $reflection;
+
+    /**
+     * @throws ReflectionException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->reflection = new ReflectionClass(get_class($this->getFixer()));
+    }
+
     /**
      * @throws ReflectionException
      */
     public function __call(string $name, array $arguments = []): void
     {
-        $reflection = new ReflectionClass(get_class($this->getFixer()));
-        $reflectedMethod = $reflection->getMethod($name);
+        if (method_exists($this, $name)) {
+            $this->{$name}(...$arguments);
+        }
+
+        $reflectedMethod = $this->reflection->getMethod($name);
         $reflectedMethod->setAccessible(true);
         $reflectedMethod->invoke($this->getFixer(), ...$arguments);
     }
@@ -29,10 +43,19 @@ abstract class FixerWorkaround extends AbstractFixer
      */
     public function __get(string $name): mixed
     {
-        $reflection = new ReflectionClass(get_class($this->getFixer()));
-        $reflectedProperty = $reflection->getProperty($name);
+        $reflectedProperty = $this->reflection->getProperty($name);
         $reflectedProperty->setAccessible(true);
         return $reflectedProperty->getValue($this->getFixer());
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function __set(string $name, mixed $value): void
+    {
+        $reflectedProperty = $this->reflection->getProperty($name);
+        $reflectedProperty->setAccessible(true);
+        $reflectedProperty->setValue($this->getFixer(), $value);
     }
 
     public function getDefinition(): FixerDefinition

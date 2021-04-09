@@ -14,8 +14,8 @@ class NoSpacesAfterFunctionNameFixer extends FixerWorkaround
 
     public function __construct()
     {
-        parent::__construct();
         $this->fixer = new BaseNoSpacesAfterFunctionNameFixer();
+        parent::__construct();
     }
 
     protected function getFixer(): BaseNoSpacesAfterFunctionNameFixer
