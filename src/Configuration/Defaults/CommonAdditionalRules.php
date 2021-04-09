@@ -30,7 +30,9 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
         FullyQualifiedStrictTypesFixer::class => null,
         OrderedImportsFixer::class => null,
         BinaryOperatorSpacesFixer::class => [
-            "operators" => ["|" => "no_space"],
+            "operators" => [
+                "|" => "no_space",
+            ],
         ],
         PhpdocLineSpanFixer::class => [
             "const" => "single",

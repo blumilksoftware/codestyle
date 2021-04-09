@@ -88,3 +88,10 @@ docker-compose exec php composer install
 ```shell
 docker-compose exec php ash
 ```
+
+### scripts
+```shell
+docker-compose exec php composer ecs
+docker-compose exec php composer ecs-fix
+docker-compose exec php composer test
+```
