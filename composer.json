@@ -24,7 +24,7 @@
   },
   "scripts": {
     "ecs": "./vendor/bin/ecs check",
-    "ecs-fix": "./vendor/bin/ecs check --fix",
+    "ecsf": "./vendor/bin/ecs check --fix",
     "test": "./vendor/bin/phpunit tests"
   },
   "require-dev": {

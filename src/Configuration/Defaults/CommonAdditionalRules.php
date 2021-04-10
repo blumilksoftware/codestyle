@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
 use Blumilk\Codestyle\Configuration\AdditionalRules;
+use Blumilk\Codestyle\Fixers\BinaryOperatorSpacesFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
@@ -27,5 +28,6 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
         NoSpacesAfterFunctionNameFixer::class => null,
         FullyQualifiedStrictTypesFixer::class => null,
         OrderedImportsFixer::class => null,
+        BinaryOperatorSpacesFixer::class => null,
     ];
 }

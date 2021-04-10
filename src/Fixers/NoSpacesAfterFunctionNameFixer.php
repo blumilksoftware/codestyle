@@ -4,31 +4,23 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Fixers;
 
-use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\FixerDefinition\CodeSample;
-use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\Tokenizer\CT;
+use PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer as BaseNoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
-final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
+class NoSpacesAfterFunctionNameFixer extends FixerWorkaround
 {
-    public function getDefinition(): FixerDefinition
+    protected BaseNoSpacesAfterFunctionNameFixer $fixer;
+
+    public function __construct()
     {
-        return new FixerDefinition(
-            "When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.",
-            [new CodeSample("<?php\nrequire ('sample.php');\necho (test (3));\nexit  (1);\n\$func ();\n")]
-        );
+        $this->fixer = new BaseNoSpacesAfterFunctionNameFixer();
+        parent::__construct();
     }
 
-    public function getPriority(): int
+    protected function getFixer(): BaseNoSpacesAfterFunctionNameFixer
     {
-        return 2;
-    }
-
-    public function isCandidate(Tokens $tokens): bool
-    {
-        return $tokens->isAnyTokenKindsFound(array_merge($this->getFunctionyTokenKinds(), [T_STRING]));
+        return $this->fixer;
     }
 
     protected function applyFix(SplFileInfo $file, Tokens $tokens): void
@@ -61,7 +53,7 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
                 if (!$tokens[$possibleDefinitionIndex]->isGivenKind(T_FUNCTION)) {
                     $this->fixFunctionCall($tokens, $index);
                 }
-            } elseif ($tokens[$lastTokenIndex]->equalsAny($braceTypes)) {
+            } elseif ($tokens[$lastTokenIndex]->equalsAny($braceTypes ?? [])) {
                 $block = Tokens::detectBlockType($tokens[$lastTokenIndex]);
                 if (
                     $block["type"] === Tokens::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE
@@ -75,28 +67,9 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
         }
     }
 
-    private function fixFunctionCall(Tokens $tokens, int $index): void
+    protected function getFunctionyTokenKinds(): array
     {
-        if ($tokens[$index - 1]->isWhitespace()) {
-            $tokens->clearAt($index - 1);
-        }
-    }
-
-    private function getBraceAfterVariableKinds(): array
-    {
-        static $tokens = [
-            ")",
-            "]",
-            [CT::T_DYNAMIC_VAR_BRACE_CLOSE],
-            [CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE],
-        ];
-
-        return $tokens;
-    }
-
-    private function getFunctionyTokenKinds(): array
-    {
-        static $tokens = [
+        return [
             T_ARRAY,
             T_ECHO,
             T_EMPTY,
@@ -113,21 +86,5 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
             T_VARIABLE,
             T_FN,
         ];
-
-        return $tokens;
-    }
-
-    private function getLanguageConstructionTokenKinds(): array
-    {
-        static $languageConstructionTokens = [
-            T_ECHO,
-            T_PRINT,
-            T_INCLUDE,
-            T_INCLUDE_ONCE,
-            T_REQUIRE,
-            T_REQUIRE_ONCE,
-        ];
-
-        return $languageConstructionTokens;
     }
 }
