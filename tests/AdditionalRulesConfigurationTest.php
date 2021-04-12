@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Blumilk\Codestyle\Config;
 use Blumilk\Codestyle\Configuration\Defaults\CommonAdditionalRules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
+use Blumilk\Codestyle\Fixers\BinaryOperatorSpacesFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
@@ -13,8 +14,6 @@ use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
-use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
-use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\StringNotation\HeredocToNowdocFixer;
 use PHPUnit\Framework\TestCase;
@@ -38,15 +37,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                 NoSpacesAfterFunctionNameFixer::class => null,
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
-                BinaryOperatorSpacesFixer::class => [
-                    "operators" => [
-                        "|" => "no_space",
-                    ],
-                ],
-                PhpdocLineSpanFixer::class => [
-                    "const" => "single",
-                    "property" => "single",
-                ],
+                BinaryOperatorSpacesFixer::class => null,
             ],
             $config->options()["rules"]
         );
@@ -74,15 +65,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                 NoSpacesAfterFunctionNameFixer::class => null,
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
-                BinaryOperatorSpacesFixer::class => [
-                    "operators" => [
-                        "|" => "no_space",
-                    ],
-                ],
-                PhpdocLineSpanFixer::class => [
-                    "const" => "single",
-                    "property" => "single",
-                ],
+                BinaryOperatorSpacesFixer::class => null,
             ],
             $config->options()["rules"]
         );
@@ -107,15 +90,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                 NoSpacesAfterFunctionNameFixer::class => null,
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
-                BinaryOperatorSpacesFixer::class => [
-                    "operators" => [
-                        "|" => "no_space",
-                    ],
-                ],
-                PhpdocLineSpanFixer::class => [
-                    "const" => "single",
-                    "property" => "single",
-                ],
+                BinaryOperatorSpacesFixer::class => null,
                 HeredocToNowdocFixer::class => null,
             ],
             $config->options()["rules"]
@@ -145,15 +120,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                 NoSpacesAfterFunctionNameFixer::class => null,
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
-                BinaryOperatorSpacesFixer::class => [
-                    "operators" => [
-                        "|" => "no_space",
-                    ],
-                ],
-                PhpdocLineSpanFixer::class => [
-                    "const" => "single",
-                    "property" => "single",
-                ],
+                BinaryOperatorSpacesFixer::class => null,
                 NoMixedEchoPrintFixer::class => [
                     "use" => "echo",
                 ],
