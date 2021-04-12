@@ -13,6 +13,7 @@ use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 
 class CommonAdditionalRules extends Rules implements AdditionalRules
@@ -29,5 +30,9 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
         FullyQualifiedStrictTypesFixer::class => null,
         OrderedImportsFixer::class => null,
         BinaryOperatorSpacesFixer::class => null,
+        PhpdocLineSpanFixer::class => [
+            "const" => "single",
+            "property" => "single",
+        ],
     ];
 }

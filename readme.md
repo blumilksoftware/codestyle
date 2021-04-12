@@ -69,3 +69,29 @@ Then run:
 ```shell
 composer ecs
 ```
+
+# Contributing
+
+### Requirements
+- docker
+- docker-compose
+
+### installation
+
+```shell
+cp .env.example .env
+# adjust '.env' file
+docker-compose up -d
+docker-compose exec php composer install
+```
+### shell
+```shell
+docker-compose exec php ash
+```
+
+### scripts
+```shell
+docker-compose exec php composer ecs
+docker-compose exec php composer ecsf
+docker-compose exec php composer test
+```

@@ -14,6 +14,7 @@ use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\StringNotation\HeredocToNowdocFixer;
 use PHPUnit\Framework\TestCase;
@@ -38,6 +39,10 @@ class AdditionalRulesConfigurationTest extends TestCase
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
                 BinaryOperatorSpacesFixer::class => null,
+                PhpdocLineSpanFixer::class => [
+                    "const" => "single",
+                    "property" => "single",
+                ],
             ],
             $config->options()["rules"]
         );
@@ -66,6 +71,10 @@ class AdditionalRulesConfigurationTest extends TestCase
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
                 BinaryOperatorSpacesFixer::class => null,
+                PhpdocLineSpanFixer::class => [
+                    "const" => "single",
+                    "property" => "single",
+                ],
             ],
             $config->options()["rules"]
         );
@@ -91,6 +100,10 @@ class AdditionalRulesConfigurationTest extends TestCase
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
                 BinaryOperatorSpacesFixer::class => null,
+                PhpdocLineSpanFixer::class => [
+                    "const" => "single",
+                    "property" => "single",
+                ],
                 HeredocToNowdocFixer::class => null,
             ],
             $config->options()["rules"]
@@ -121,6 +134,10 @@ class AdditionalRulesConfigurationTest extends TestCase
                 FullyQualifiedStrictTypesFixer::class => null,
                 OrderedImportsFixer::class => null,
                 BinaryOperatorSpacesFixer::class => null,
+                PhpdocLineSpanFixer::class => [
+                    "const" => "single",
+                    "property" => "single",
+                ],
                 NoMixedEchoPrintFixer::class => [
                     "use" => "echo",
                 ],
