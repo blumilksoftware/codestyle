@@ -138,8 +138,8 @@ class AdditionalRulesConfigurationTest extends TestCase
         $rules = new CommonAdditionalRules();
         $rule = new Rule(
             NoMixedEchoPrintFixer::class, [
-            "use" => "echo",
-        ]
+                                            "use" => "echo",
+                                        ]
         );
 
         $config = new Config(
