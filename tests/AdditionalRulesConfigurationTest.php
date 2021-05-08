@@ -14,9 +14,11 @@ use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\StringNotation\HeredocToNowdocFixer;
+use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PHPUnit\Framework\TestCase;
 
 class AdditionalRulesConfigurationTest extends TestCase
@@ -43,6 +45,13 @@ class AdditionalRulesConfigurationTest extends TestCase
                     "const" => "single",
                     "property" => "single",
                 ],
+                GeneralPhpdocAnnotationRemoveFixer::class => [
+                    "annotations" => [
+                        "package",
+                        "author",
+                    ],
+                ],
+                NoExtraBlankLinesFixer::class => null,
             ],
             $config->options()["rules"]
         );
@@ -75,6 +84,13 @@ class AdditionalRulesConfigurationTest extends TestCase
                     "const" => "single",
                     "property" => "single",
                 ],
+                GeneralPhpdocAnnotationRemoveFixer::class => [
+                    "annotations" => [
+                        "package",
+                        "author",
+                    ],
+                ],
+                NoExtraBlankLinesFixer::class => null,
             ],
             $config->options()["rules"]
         );
@@ -104,6 +120,13 @@ class AdditionalRulesConfigurationTest extends TestCase
                     "const" => "single",
                     "property" => "single",
                 ],
+                GeneralPhpdocAnnotationRemoveFixer::class => [
+                    "annotations" => [
+                        "package",
+                        "author",
+                    ],
+                ],
+                NoExtraBlankLinesFixer::class => null,
                 HeredocToNowdocFixer::class => null,
             ],
             $config->options()["rules"]
@@ -113,9 +136,11 @@ class AdditionalRulesConfigurationTest extends TestCase
     public function testExtendingWithOptionsAdditionalRulesConfiguration(): void
     {
         $rules = new CommonAdditionalRules();
-        $rule = new Rule(NoMixedEchoPrintFixer::class, [
+        $rule = new Rule(
+            NoMixedEchoPrintFixer::class, [
             "use" => "echo",
-        ]);
+        ]
+        );
 
         $config = new Config(
             rules: $rules->add($rule)
@@ -138,6 +163,13 @@ class AdditionalRulesConfigurationTest extends TestCase
                     "const" => "single",
                     "property" => "single",
                 ],
+                GeneralPhpdocAnnotationRemoveFixer::class => [
+                    "annotations" => [
+                        "package",
+                        "author",
+                    ],
+                ],
+                NoExtraBlankLinesFixer::class => null,
                 NoMixedEchoPrintFixer::class => [
                     "use" => "echo",
                 ],
