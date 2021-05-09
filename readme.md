@@ -58,40 +58,49 @@ return $config->config();
 ```
 
 #### Usage with Composer
-Add script to your `composer.json` file:
+Add scripts to your `composer.json` file:
 ```json
-"scripts": {
-  "ecs": "./vendor/bin/ecs check"
+{
+  "scripts": {
+    "ecs": "./vendor/bin/ecs check",
+    "ecsf": "./vendor/bin/ecs check --fix"
+  }
 }
 ```
 
-Then run:
+Then run following command to check codestyle:
 ```shell
 composer ecs
 ```
 
-# Contributing
+or following to fix found errors:
+```shell
+composer ecsf
+```
 
-### Requirements
-- docker
-- docker-compose
-
-### installation
-
+### Contributing
+In cloned or forked repository, run:
 ```shell
 cp .env.example .env
-# adjust '.env' file
-docker-compose up -d
-docker-compose exec php composer install
-```
-### shell
-```shell
-docker-compose exec php ash
+composer install
 ```
 
-### scripts
+There are scripts available for package codestyle checking and testing:
 ```shell
-docker-compose exec php composer ecs
-docker-compose exec php composer ecsf
-docker-compose exec php composer test
+composer ecs
+composer ecsf
+composer test
 ```
+
+There is also the Docker Compose configuration available:
+```shell
+docker-compose up -d
+docker-compose exec php php -v
+docker-compose exec php composer -V
+```
+
+Please maintain our project guidelines:
+* keep issues well described, labeled and in English,
+* add issue number to all your commits,
+* add issue number to your branch name,
+* squash your commits into one commit with standardized name.

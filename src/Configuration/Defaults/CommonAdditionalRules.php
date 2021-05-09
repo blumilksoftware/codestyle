@@ -13,8 +13,10 @@ use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
+use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 
 class CommonAdditionalRules extends Rules implements AdditionalRules
 {
@@ -34,5 +36,12 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
             "const" => "single",
             "property" => "single",
         ],
+        GeneralPhpdocAnnotationRemoveFixer::class => [
+            "annotations" => [
+                "package",
+                "author",
+            ],
+        ],
+        NoExtraBlankLinesFixer::class => null,
     ];
 }

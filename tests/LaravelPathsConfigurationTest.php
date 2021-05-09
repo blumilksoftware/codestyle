@@ -13,8 +13,10 @@ class LaravelPathsConfigurationTest extends TestCase
         $paths = new LaravelPaths();
         $config = new Config(paths: $paths);
 
-        $this->assertSame(["app", "config", "database", "resources/lang", "routes", "tests"],
-            $config->options()["paths"]);
+        $this->assertSame(
+            ["app", "config", "database", "resources/lang", "routes", "tests"],
+            $config->options()["paths"]
+        );
     }
 
     public function testFilteredLaravelPathsConfiguration(): void
@@ -22,8 +24,10 @@ class LaravelPathsConfigurationTest extends TestCase
         $paths = new LaravelPaths();
         $config = new Config(paths: $paths->filter("resources/lang"));
 
-        $this->assertSame(["app", "config", "database", "routes", "tests"],
-            $config->options()["paths"]);
+        $this->assertSame(
+            ["app", "config", "database", "routes", "tests"],
+            $config->options()["paths"]
+        );
     }
 
     public function testClearedLaravelPathsConfiguration(): void

@@ -13,9 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Validate composer.json
-        run: composer validate
-
       - name: Run the Docker containers
         run: docker-compose up -d
 
@@ -26,6 +23,9 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+
+      - name: Validate composer.json
+        run: docker-compose run php composer validate
 
       - name: Install dependencies
         run: docker-compose run php composer install --prefer-dist --no-progress --no-suggest
