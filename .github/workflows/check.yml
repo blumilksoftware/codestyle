@@ -13,9 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run the Docker containers
-        run: docker-compose up -d
-
       - name: Cache composer dependencies
         uses: actions/cache@v2
         with:
@@ -25,13 +22,13 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Validate composer.json
-        run: docker-compose run php composer validate
+        run: composer validate
 
       - name: Install dependencies
-        run: docker-compose run php composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - name: Run code style checker
-        run: docker-compose run php composer ecs
+        run: composer ecs
 
       - name: Run tests
-        run: docker-compose run php composer test
+        run: composer test
