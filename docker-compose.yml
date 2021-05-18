@@ -5,6 +5,6 @@ services:
     image: ghcr.io/blumilksoftware/php:8.0.3.1
     container_name: blumilk-codestyle-php
     working_dir: /application
-    user: ${CURRENT_UID}
+    user: ${CURRENT_UID:-1000}
     volumes:
       - .:/application

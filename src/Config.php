@@ -13,7 +13,6 @@ use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\SetLists;
 use Blumilk\Codestyle\Configuration\SkippedRules;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator as Container;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
@@ -24,7 +23,6 @@ class Config
     protected SkippedRules $skipped;
     protected AdditionalRules $rules;
 
-    #[Pure]
     public function __construct(
         ?Paths $paths = null,
         ?SetLists $sets = null,
@@ -43,9 +41,12 @@ class Config
 
         return static function (Container $container) use ($sets, $skipped, $rules, $paths): void {
             $parameters = $container->parameters();
-            $parameters->set(Option::SETS, $sets);
             $parameters->set(Option::SKIP, $skipped);
             $parameters->set(Option::PATHS, $paths);
+
+            foreach ($sets as $set) {
+                $container->import($set);
+            }
 
             $services = $container->services();
             foreach ($rules as $rule => $configuration) {
