@@ -7,6 +7,7 @@ namespace Blumilk\Codestyle\Fixers;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
@@ -34,12 +35,13 @@ EOF;
 
     protected function applyFix(SplFileInfo $file, Tokens $tokens): void
     {
-        foreach ($tokens as $token) {
+        foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(T_CONSTANT_ENCAPSED_STRING)) {
                 continue;
             }
 
             $content = $token->getContent();
+            $prefix = "";
             if (
                 $content[0] === "'" &&
                 !str_contains($content, '"') &&
@@ -49,7 +51,8 @@ EOF;
                 $content = substr($content, 1, -1);
                 $content = str_replace("\\'", "'", $content);
                 $content = str_replace("\\$", "$", $content);
-                $token->setContent("\"" . $content . "\"");
+
+                $tokens[$index] = new Token([T_CONSTANT_ENCAPSED_STRING, $prefix . "\"" . $content . "\""]);
             }
         }
     }
