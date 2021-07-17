@@ -11,7 +11,7 @@ class CodestyleTest extends TestCase
     protected const FIXTURES = [
         "singleQuotes",
         "strictTypes",
-        "unionTypes"
+        "unionTypes",
     ];
 
     protected Application $application;
@@ -47,14 +47,11 @@ class CodestyleTest extends TestCase
     protected function runComposerEcsCommand(bool $fix = false): bool
     {
         $command = $fix ? "ecsf-tmp" : "ecs-tmp";
+        $input = [
+            "command" => $command,
+        ];
 
-        return $this->application->run(
-                new ArrayInput(
-                    [
-                        "command" => $command,
-                    ]
-                )
-            ) === 0;
+        return $this->application->run(new ArrayInput($input)) === 0;
     }
 
     /**
