@@ -2,23 +2,18 @@
 
 declare(strict_types=1);
 
-use Composer\Console\Application;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Input\ArrayInput;
 
 class CodestyleTest extends TestCase
 {
-    protected const FIXTURES = [
-        "singleQuotes",
-        "strictTypes",
-        "unionTypes",
-    ];
-
-    protected Application $application;
-
     protected function setUp(): void
     {
-        $this->bootstrapComposer();
+        $this->clearTempDirectory();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->clearTempDirectory();
     }
 
     /**
@@ -26,19 +21,12 @@ class CodestyleTest extends TestCase
      */
     public function testFixtures(): void
     {
-        $this->clearTempDirectory();
+        $fixtures = scandir(__DIR__ . "/fixtures");
+        $fixtures = array_filter($fixtures, fn(string $dir): bool => !str_contains($dir, "."));
 
-        foreach (static::FIXTURES as $fixture) {
+        foreach ($fixtures as $fixture) {
             $this->testFixture($fixture);
         }
-
-        $this->clearTempDirectory();
-    }
-
-    protected function bootstrapComposer(): void
-    {
-        $this->application = new Application();
-        $this->application->setAutoExit(false);
     }
 
     /**
@@ -47,10 +35,11 @@ class CodestyleTest extends TestCase
     protected function runComposerEcsCommand(bool $fix = false): bool
     {
         $command = $fix ? "ecsf-tmp" : "ecs-tmp";
-
         $result = 0;
         $output = null;
-        exec("./vendor/bin/composer ".$command, $output, $result);
+
+        exec("./vendor/bin/composer " . $command, $output, $result);
+
         return $result === 0;
     }
 
