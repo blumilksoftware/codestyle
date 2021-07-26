@@ -47,11 +47,11 @@ class CodestyleTest extends TestCase
     protected function runComposerEcsCommand(bool $fix = false): bool
     {
         $command = $fix ? "ecsf-tmp" : "ecs-tmp";
-        $input = [
-            "command" => $command,
-        ];
 
-        return $this->application->run(new ArrayInput($input)) === 0;
+        $result = 0;
+        $output = null;
+        exec("./vendor/bin/composer ".$command, $output, $result);
+        return $result === 0;
     }
 
     /**
