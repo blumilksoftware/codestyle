@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-class Whatever
+class UnionTypesExample
 {
     public int|string $something;
 
-    /**
-     * @throws JsonException
-     */
     public function do(): void
     {
         $i = 1 + 1;

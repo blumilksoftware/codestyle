@@ -8,8 +8,10 @@
     "symplify/easy-coding-standard": "9.3.12"
   },
   "require-dev": {
+    "composer/composer": "2.*",
     "jetbrains/phpstorm-attributes": "^1.0",
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "symfony/console": "^5.3"
   },
   "authors": [
     {
@@ -29,6 +31,10 @@
   "scripts": {
     "ecs": "./vendor/bin/ecs check",
     "ecsf": "./vendor/bin/ecs check --fix",
-    "test": "./vendor/bin/phpunit tests --colors always"
+    "test": "./vendor/bin/phpunit tests --colors always",
+    "unit": "./vendor/bin/phpunit tests/unit --colors always",
+    "e2e": "./vendor/bin/phpunit tests/codestyle --colors always",
+    "ecs-tmp": "./vendor/bin/ecs check --config ./tests/codestyle/config.php",
+    "ecsf-tmp": "./vendor/bin/ecs check --config ./tests/codestyle/config.php --fix"
   }
 }
