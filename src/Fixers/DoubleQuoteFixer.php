@@ -24,7 +24,7 @@ EOF;
             "Convert single quotes to double quotes for simple strings.",
             [
                 new CodeSample($codeSample),
-            ]
+            ],
         );
     }
 

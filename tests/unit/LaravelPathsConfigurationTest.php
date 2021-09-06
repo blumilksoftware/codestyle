@@ -15,7 +15,7 @@ class LaravelPathsConfigurationTest extends TestCase
 
         $this->assertSame(
             ["app", "config", "database", "resources/lang", "routes", "tests"],
-            $config->options()["paths"]
+            $config->options()["paths"],
         );
     }
 
@@ -26,7 +26,7 @@ class LaravelPathsConfigurationTest extends TestCase
 
         $this->assertSame(
             ["app", "config", "database", "routes", "tests"],
-            $config->options()["paths"]
+            $config->options()["paths"],
         );
     }
 

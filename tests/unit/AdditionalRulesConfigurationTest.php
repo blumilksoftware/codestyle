@@ -10,6 +10,7 @@ use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
+use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
@@ -52,8 +53,15 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                TrailingCommaInMultilineFixer::class => [
+                    "elements" => [
+                        "arrays",
+                        "parameters",
+                        "arguments",
+                    ],
+                ],
             ],
-            $config->options()["rules"]
+            $config->options()["rules"],
         );
     }
 
@@ -91,8 +99,15 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                TrailingCommaInMultilineFixer::class => [
+                    "elements" => [
+                        "arrays",
+                        "parameters",
+                        "arguments",
+                    ],
+                ],
             ],
-            $config->options()["rules"]
+            $config->options()["rules"],
         );
     }
 
@@ -100,7 +115,7 @@ class AdditionalRulesConfigurationTest extends TestCase
     {
         $rules = new CommonAdditionalRules();
         $config = new Config(
-            rules: $rules->add(new Rule(HeredocToNowdocFixer::class))
+            rules: $rules->add(new Rule(HeredocToNowdocFixer::class)),
         );
 
         $this->assertSame(
@@ -127,9 +142,16 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                TrailingCommaInMultilineFixer::class => [
+                    "elements" => [
+                        "arrays",
+                        "parameters",
+                        "arguments",
+                    ],
+                ],
                 HeredocToNowdocFixer::class => null,
             ],
-            $config->options()["rules"]
+            $config->options()["rules"],
         );
     }
 
@@ -140,11 +162,11 @@ class AdditionalRulesConfigurationTest extends TestCase
             NoMixedEchoPrintFixer::class,
             [
                 "use" => "echo",
-            ]
+            ],
         );
 
         $config = new Config(
-            rules: $rules->add($rule)
+            rules: $rules->add($rule),
         );
 
         $this->assertSame(
@@ -171,11 +193,18 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                TrailingCommaInMultilineFixer::class => [
+                    "elements" => [
+                        "arrays",
+                        "parameters",
+                        "arguments",
+                    ],
+                ],
                 NoMixedEchoPrintFixer::class => [
                     "use" => "echo",
                 ],
             ],
-            $config->options()["rules"]
+            $config->options()["rules"],
         );
     }
 }

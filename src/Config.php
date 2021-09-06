@@ -27,7 +27,7 @@ class Config
         ?Paths $paths = null,
         ?SetLists $sets = null,
         ?SkippedRules $skipped = null,
-        ?AdditionalRules $rules = null
+        ?AdditionalRules $rules = null,
     ) {
         $this->paths = $paths ?? new LaravelPaths();
         $this->sets = $sets ?? new CommonSetLists();
