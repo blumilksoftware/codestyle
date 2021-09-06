@@ -35,7 +35,7 @@ use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 $paths = new LaravelPaths();
 
 $config = new Config(
-    paths: $paths->filter("app", "tests")->add("src")
+    paths: $paths->filter("app", "tests")->add("src"),
 );
 
 return $config->config();
@@ -51,7 +51,7 @@ use Blumilk\Codestyle\Config;
 use Blumilk\Codestyle\Configuration\Defaults\Paths;
 
 $config = new Config(
-    paths: new Paths("src")
+    paths: new Paths("src"),
 );
 
 return $config->config();
