@@ -29,7 +29,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 ReturnAssignmentFixer::class => null,
                 BinaryOperatorSpacesFixer::class => null,
             ],
-            $config->options()["skipped"]
+            $config->options()["skipped"],
         );
     }
 
@@ -52,7 +52,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 NotOperatorWithSuccessorSpaceFixer::class => null,
                 BinaryOperatorSpacesFixer::class => null,
             ],
-            $config->options()["skipped"]
+            $config->options()["skipped"],
         );
     }
 
@@ -60,7 +60,7 @@ class SkippedRulesConfigurationTest extends TestCase
     {
         $skipped = new CommonSkippedRules();
         $config = new Config(
-            skipped: $skipped->add(new Rule(LogicalOperatorsFixer::class))
+            skipped: $skipped->add(new Rule(LogicalOperatorsFixer::class)),
         );
 
         $this->assertSame(
@@ -72,7 +72,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 BinaryOperatorSpacesFixer::class => null,
                 LogicalOperatorsFixer::class => null,
             ],
-            $config->options()["skipped"]
+            $config->options()["skipped"],
         );
     }
 
@@ -80,7 +80,7 @@ class SkippedRulesConfigurationTest extends TestCase
     {
         $skipped = new CommonSkippedRules();
         $config = new Config(
-            skipped: $skipped->add(new Rule(ArraySyntaxFixer::class, [__DIR__ . "/test"]))
+            skipped: $skipped->add(new Rule(ArraySyntaxFixer::class, [__DIR__ . "/test"])),
         );
 
         $this->assertSame(
@@ -92,7 +92,7 @@ class SkippedRulesConfigurationTest extends TestCase
                 BinaryOperatorSpacesFixer::class => null,
                 ArraySyntaxFixer::class => [__DIR__ . "/test"],
             ],
-            $config->options()["skipped"]
+            $config->options()["skipped"],
         );
     }
 }
