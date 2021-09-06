@@ -8,6 +8,7 @@ use Blumilk\Codestyle\Configuration\AdditionalRules;
 use Blumilk\Codestyle\Fixers\BinaryOperatorSpacesFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
+use PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
@@ -44,6 +45,7 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
             ],
         ],
         NoExtraBlankLinesFixer::class => null,
+        OperatorSpacingSniff::class => null,
         TrailingCommaInMultilineFixer::class => [
             "elements" => [
                 "arrays",

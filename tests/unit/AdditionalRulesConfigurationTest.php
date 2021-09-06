@@ -8,6 +8,7 @@ use Blumilk\Codestyle\Configuration\Utils\Rule;
 use Blumilk\Codestyle\Fixers\BinaryOperatorSpacesFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
+use PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
@@ -53,6 +54,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
                         "arrays",
@@ -99,6 +101,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
                         "arrays",
@@ -142,6 +145,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
                         "arrays",
@@ -193,6 +197,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NoExtraBlankLinesFixer::class => null,
+                OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
                         "arrays",
