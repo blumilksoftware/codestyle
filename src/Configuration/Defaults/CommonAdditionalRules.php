@@ -44,7 +44,14 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
                 "author",
             ],
         ],
-        NoExtraBlankLinesFixer::class => null,
+        NoExtraBlankLinesFixer::class => [
+            "tokens" => [
+                "extra",
+                "curly_brace_block",
+                "parenthesis_brace_block",
+                "square_brace_block",
+            ],
+        ],
         OperatorSpacingSniff::class => null,
         TrailingCommaInMultilineFixer::class => [
             "elements" => [
