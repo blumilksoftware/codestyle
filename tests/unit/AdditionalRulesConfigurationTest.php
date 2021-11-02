@@ -53,7 +53,14 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "author",
                     ],
                 ],
-                NoExtraBlankLinesFixer::class => null,
+                NoExtraBlankLinesFixer::class => [
+                    "tokens" => [
+                        "extra",
+                        "curly_brace_block",
+                        "parenthesis_brace_block",
+                        "square_brace_block",
+                    ],
+                ],
                 OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
@@ -100,7 +107,14 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "author",
                     ],
                 ],
-                NoExtraBlankLinesFixer::class => null,
+                NoExtraBlankLinesFixer::class => [
+                    "tokens" => [
+                        "extra",
+                        "curly_brace_block",
+                        "parenthesis_brace_block",
+                        "square_brace_block",
+                    ],
+                ],
                 OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
@@ -144,7 +158,14 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "author",
                     ],
                 ],
-                NoExtraBlankLinesFixer::class => null,
+                NoExtraBlankLinesFixer::class => [
+                    "tokens" => [
+                        "extra",
+                        "curly_brace_block",
+                        "parenthesis_brace_block",
+                        "square_brace_block",
+                    ],
+                ],
                 OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
@@ -196,7 +217,14 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "author",
                     ],
                 ],
-                NoExtraBlankLinesFixer::class => null,
+                NoExtraBlankLinesFixer::class => [
+                    "tokens" => [
+                        "extra",
+                        "curly_brace_block",
+                        "parenthesis_brace_block",
+                        "square_brace_block",
+                    ],
+                ],
                 OperatorSpacingSniff::class => null,
                 TrailingCommaInMultilineFixer::class => [
                     "elements" => [
