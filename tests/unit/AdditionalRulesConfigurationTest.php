@@ -12,6 +12,7 @@ use PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff;
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
+use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
@@ -69,6 +70,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "arguments",
                     ],
                 ],
+                NullableTypeDeclarationForDefaultNullValueFixer::class => null,
             ],
             $config->options()["rules"],
         );
@@ -123,6 +125,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "arguments",
                     ],
                 ],
+                NullableTypeDeclarationForDefaultNullValueFixer::class => null,
             ],
             $config->options()["rules"],
         );
@@ -174,6 +177,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "arguments",
                     ],
                 ],
+                NullableTypeDeclarationForDefaultNullValueFixer::class => null,
                 HeredocToNowdocFixer::class => null,
             ],
             $config->options()["rules"],
@@ -233,6 +237,7 @@ class AdditionalRulesConfigurationTest extends TestCase
                         "arguments",
                     ],
                 ],
+                NullableTypeDeclarationForDefaultNullValueFixer::class => null,
                 NoMixedEchoPrintFixer::class => [
                     "use" => "echo",
                 ],

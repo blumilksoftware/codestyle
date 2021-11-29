@@ -11,6 +11,7 @@ use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
 use PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
+use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
@@ -60,5 +61,6 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
                 "arguments",
             ],
         ],
+        NullableTypeDeclarationForDefaultNullValueFixer::class => null,
     ];
 }
