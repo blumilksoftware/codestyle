@@ -38,7 +38,7 @@ class CodestyleTest extends TestCase
         $result = 0;
         $output = null;
 
-        exec("./vendor/bin/composer " . $command, $output, $result);
+        exec("./vendor/bin/composer " . $command . " 2> /dev/null", $output, $result);
 
         return $result === 0;
     }
@@ -49,6 +49,7 @@ class CodestyleTest extends TestCase
     protected function testFixture(string $name): void
     {
         copy(__DIR__ . "/fixtures/${name}/actual.php", __DIR__ . "/tmp/${name}.php");
+
         $this->assertFalse($this->runComposerEcsCommand());
         $this->assertTrue($this->runComposerEcsCommand(true));
         $this->assertFileEquals(__DIR__ . "/fixtures/${name}/expected.php", __DIR__ . "/tmp/${name}.php");
