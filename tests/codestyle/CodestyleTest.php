@@ -6,6 +6,43 @@ use PHPUnit\Framework\TestCase;
 
 class CodestyleTest extends TestCase
 {
+    /**
+     * @requires PHP >= 8.0
+     * @throws Exception
+     */
+    public function testPhp80Fixtures(): void
+    {
+        $fixtures = [
+            "noExtraBlankLines",
+            "noExtraBlankLines",
+            "nullableTypeForDefaultNull",
+            "operatorSpacing",
+            "singleQuotes",
+            "strictTypes",
+            "trailingCommas",
+            "unionTypes",
+        ];
+
+        foreach ($fixtures as $fixture) {
+            $this->testFixture($fixture);
+        }
+    }
+
+    /**
+     * @requires PHP >= 8.1
+     * @throws Exception
+     */
+    public function testPhp81Fixtures(): void
+    {
+        $fixtures = [
+            "enums",
+        ];
+
+        foreach ($fixtures as $fixture) {
+            $this->testFixture($fixture);
+        }
+    }
+
     protected function setUp(): void
     {
         $this->clearTempDirectory();
@@ -14,19 +51,6 @@ class CodestyleTest extends TestCase
     protected function tearDown(): void
     {
         $this->clearTempDirectory();
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testFixtures(): void
-    {
-        $fixtures = scandir(__DIR__ . "/fixtures");
-        $fixtures = array_filter($fixtures, fn(string $dir): bool => !str_contains($dir, "."));
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture);
-        }
     }
 
     /**
