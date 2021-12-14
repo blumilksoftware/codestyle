@@ -6,6 +6,16 @@ use PHPUnit\Framework\TestCase;
 
 class CodestyleTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        $this->clearTempDirectory();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->clearTempDirectory();
+    }
+
     /**
      * @requires PHP >= 8.0
      * @throws Exception
@@ -41,16 +51,6 @@ class CodestyleTest extends TestCase
         foreach ($fixtures as $fixture) {
             $this->testFixture($fixture);
         }
-    }
-
-    protected function setUp(): void
-    {
-        $this->clearTempDirectory();
-    }
-
-    protected function tearDown(): void
-    {
-        $this->clearTempDirectory();
     }
 
     /**
