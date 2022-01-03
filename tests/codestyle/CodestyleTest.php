@@ -31,6 +31,7 @@ class CodestyleTest extends TestCase
             "strictTypes",
             "trailingCommas",
             "unionTypes",
+            "references",
         ];
 
         foreach ($fixtures as $fixture) {
@@ -46,6 +47,7 @@ class CodestyleTest extends TestCase
     {
         $fixtures = [
             "enums",
+            "readonlies",
         ];
 
         foreach ($fixtures as $fixture) {

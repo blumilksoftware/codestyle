@@ -5,7 +5,7 @@
   "type": "library",
   "require": {
     "php": "^8.0",
-    "symplify/easy-coding-standard": "10.0.2"
+    "symplify/easy-coding-standard": "10.0.8"
   },
   "require-dev": {
     "composer/composer": "2.*",
