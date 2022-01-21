@@ -20,7 +20,7 @@ class Paths implements PathsContract
         return $this->paths;
     }
 
-    public function add(string ...$paths): self
+    public function add(string ...$paths): static
     {
         foreach ($paths as $path) {
             if (!in_array($path, $this->paths, true)) {
@@ -31,14 +31,14 @@ class Paths implements PathsContract
         return $this;
     }
 
-    public function clear(): self
+    public function clear(): static
     {
         $this->paths = [];
 
         return $this;
     }
 
-    public function filter(string ...$paths): self
+    public function filter(string ...$paths): static
     {
         foreach ($this->paths as $index => $path) {
             if (in_array($path, $paths, true)) {

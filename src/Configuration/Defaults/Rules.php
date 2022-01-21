@@ -15,7 +15,7 @@ class Rules
         return $this->rules;
     }
 
-    public function add(Rule ...$rules): self
+    public function add(Rule ...$rules): static
     {
         foreach ($rules as $rule) {
             if (!in_array($rule->getFixerClassName(), array_keys($this->rules), true)) {
@@ -26,14 +26,14 @@ class Rules
         return $this;
     }
 
-    public function clear(): self
+    public function clear(): static
     {
         $this->rules = [];
 
         return $this;
     }
 
-    public function filter(string ...$rules): self
+    public function filter(string ...$rules): static
     {
         foreach (array_keys($this->rules) as $rule) {
             if (in_array($rule, $rules, true)) {

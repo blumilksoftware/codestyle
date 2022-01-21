@@ -27,4 +27,13 @@ class TrailingCommasExample
             3,
         ];
     }
+
+    public function testMatchCase(int $integer): int
+    {
+        return match($integer) {
+            1 => 2,
+            2 => 4,
+            default => null,
+        };
+    }
 }
