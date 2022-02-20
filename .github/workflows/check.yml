@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: "Checking the package: testing and linting"
     runs-on: ubuntu-20.04
 
     strategy:

@@ -22,6 +22,15 @@ use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\StringNotation\HeredocToNowdocFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
+use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
+use PhpCsFixerCustomFixers\Fixer\InternalClassCasingFixer;
+use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
+use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
+use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
+use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
+use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
 use PHPUnit\Framework\TestCase;
 
 class AdditionalRulesConfigurationTest extends TestCase
@@ -71,6 +80,15 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
+                ConstructorEmptyBracesFixer::class => null,
+                InternalClassCasingFixer::class => null,
+                MultilinePromotedPropertiesFixer::class => null,
+                NoUselessCommentFixer::class => null,
+                PhpdocArrayStyleFixer::class => null,
+                PromotedConstructorPropertyFixer::class => null,
+                SingleSpaceAfterStatementFixer::class => null,
+                SingleSpaceBeforeStatementFixer::class => null,
+                StringableInterfaceFixer::class => null,
             ],
             $config->options()["rules"],
         );
@@ -126,6 +144,15 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
+                ConstructorEmptyBracesFixer::class => null,
+                InternalClassCasingFixer::class => null,
+                MultilinePromotedPropertiesFixer::class => null,
+                NoUselessCommentFixer::class => null,
+                PhpdocArrayStyleFixer::class => null,
+                PromotedConstructorPropertyFixer::class => null,
+                SingleSpaceAfterStatementFixer::class => null,
+                SingleSpaceBeforeStatementFixer::class => null,
+                StringableInterfaceFixer::class => null,
             ],
             $config->options()["rules"],
         );
@@ -178,6 +205,15 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
+                ConstructorEmptyBracesFixer::class => null,
+                InternalClassCasingFixer::class => null,
+                MultilinePromotedPropertiesFixer::class => null,
+                NoUselessCommentFixer::class => null,
+                PhpdocArrayStyleFixer::class => null,
+                PromotedConstructorPropertyFixer::class => null,
+                SingleSpaceAfterStatementFixer::class => null,
+                SingleSpaceBeforeStatementFixer::class => null,
+                StringableInterfaceFixer::class => null,
                 HeredocToNowdocFixer::class => null,
             ],
             $config->options()["rules"],
@@ -238,6 +274,15 @@ class AdditionalRulesConfigurationTest extends TestCase
                     ],
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
+                ConstructorEmptyBracesFixer::class => null,
+                InternalClassCasingFixer::class => null,
+                MultilinePromotedPropertiesFixer::class => null,
+                NoUselessCommentFixer::class => null,
+                PhpdocArrayStyleFixer::class => null,
+                PromotedConstructorPropertyFixer::class => null,
+                SingleSpaceAfterStatementFixer::class => null,
+                SingleSpaceBeforeStatementFixer::class => null,
+                StringableInterfaceFixer::class => null,
                 NoMixedEchoPrintFixer::class => [
                     "use" => "echo",
                 ],

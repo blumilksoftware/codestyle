@@ -6,14 +6,10 @@ namespace Blumilk\Codestyle\Configuration\Utils;
 
 class Rule
 {
-    protected string $fixer;
-    protected ?array $options;
-
-    public function __construct(string $fixer, ?array $options = null)
-    {
-        $this->fixer = $fixer;
-        $this->options = $options;
-    }
+    public function __construct(
+        protected string $fixer,
+        protected ?array $options = null,
+    ) {}
 
     public function getFixerClassName(): string
     {

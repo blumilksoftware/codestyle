@@ -8,6 +8,7 @@ class ReadonlyThing
 
     public function __construct(
         protected readonly string $string,
-    ) {
-    }
+        protected readonly ?bool $nullable,
+        protected readonly ?bool $initializedNullable = null,
+    ) {}
 }

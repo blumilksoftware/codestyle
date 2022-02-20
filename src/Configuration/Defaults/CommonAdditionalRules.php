@@ -20,6 +20,15 @@ use PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
+use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
+use PhpCsFixerCustomFixers\Fixer\InternalClassCasingFixer;
+use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
+use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
+use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
+use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
+use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
 
 class CommonAdditionalRules extends Rules implements AdditionalRules
 {
@@ -62,5 +71,14 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
             ],
         ],
         NullableTypeDeclarationForDefaultNullValueFixer::class => null,
+        ConstructorEmptyBracesFixer::class => null,
+        InternalClassCasingFixer::class => null,
+        MultilinePromotedPropertiesFixer::class => null,
+        NoUselessCommentFixer::class => null,
+        PhpdocArrayStyleFixer::class => null,
+        PromotedConstructorPropertyFixer::class => null,
+        SingleSpaceAfterStatementFixer::class => null,
+        SingleSpaceBeforeStatementFixer::class => null,
+        StringableInterfaceFixer::class => null,
     ];
 }

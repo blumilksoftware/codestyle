@@ -20,7 +20,7 @@ class CommonSetLists implements SetLists
         return $this->setLists;
     }
 
-    public function add(string ...$setLists): self
+    public function add(string ...$setLists): static
     {
         foreach ($setLists as $setList) {
             if (!in_array($setList, $this->setLists, true)) {
@@ -31,14 +31,14 @@ class CommonSetLists implements SetLists
         return $this;
     }
 
-    public function clear(): self
+    public function clear(): static
     {
         $this->setLists = [];
 
         return $this;
     }
 
-    public function filter(string ...$setLists): self
+    public function filter(string ...$setLists): static
     {
         foreach ($this->setLists as $index => $setList) {
             if (in_array($setList, $setLists, true)) {
