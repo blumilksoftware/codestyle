@@ -21,7 +21,6 @@ use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
-use PhpCsFixerCustomFixers\Fixer\InternalClassCasingFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
@@ -72,7 +71,6 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
         ],
         NullableTypeDeclarationForDefaultNullValueFixer::class => null,
         ConstructorEmptyBracesFixer::class => null,
-        InternalClassCasingFixer::class => null,
         MultilinePromotedPropertiesFixer::class => null,
         NoUselessCommentFixer::class => null,
         PhpdocArrayStyleFixer::class => null,

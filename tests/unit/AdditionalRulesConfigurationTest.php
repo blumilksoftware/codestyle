@@ -23,7 +23,6 @@ use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\StringNotation\HeredocToNowdocFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
-use PhpCsFixerCustomFixers\Fixer\InternalClassCasingFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
@@ -81,7 +80,6 @@ class AdditionalRulesConfigurationTest extends TestCase
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
                 ConstructorEmptyBracesFixer::class => null,
-                InternalClassCasingFixer::class => null,
                 MultilinePromotedPropertiesFixer::class => null,
                 NoUselessCommentFixer::class => null,
                 PhpdocArrayStyleFixer::class => null,
@@ -145,7 +143,6 @@ class AdditionalRulesConfigurationTest extends TestCase
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
                 ConstructorEmptyBracesFixer::class => null,
-                InternalClassCasingFixer::class => null,
                 MultilinePromotedPropertiesFixer::class => null,
                 NoUselessCommentFixer::class => null,
                 PhpdocArrayStyleFixer::class => null,
@@ -206,7 +203,6 @@ class AdditionalRulesConfigurationTest extends TestCase
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
                 ConstructorEmptyBracesFixer::class => null,
-                InternalClassCasingFixer::class => null,
                 MultilinePromotedPropertiesFixer::class => null,
                 NoUselessCommentFixer::class => null,
                 PhpdocArrayStyleFixer::class => null,
@@ -275,7 +271,6 @@ class AdditionalRulesConfigurationTest extends TestCase
                 ],
                 NullableTypeDeclarationForDefaultNullValueFixer::class => null,
                 ConstructorEmptyBracesFixer::class => null,
-                InternalClassCasingFixer::class => null,
                 MultilinePromotedPropertiesFixer::class => null,
                 NoUselessCommentFixer::class => null,
                 PhpdocArrayStyleFixer::class => null,
