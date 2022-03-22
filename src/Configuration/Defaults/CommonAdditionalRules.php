@@ -7,8 +7,6 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 use Blumilk\Codestyle\Configuration\AdditionalRules;
 use Blumilk\Codestyle\Fixers\BinaryOperatorSpacesFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
-use Blumilk\Codestyle\Fixers\NoSpacesAfterFunctionNameFixer;
-use PHP_CodeSniffer\Standards\PSR12\Sniffs\Operators\OperatorSpacingSniff;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
@@ -39,7 +37,6 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
         DoubleQuoteFixer::class => null,
         VoidReturnFixer::class => null,
         UseArrowFunctionsFixer::class => null,
-        NoSpacesAfterFunctionNameFixer::class => null,
         FullyQualifiedStrictTypesFixer::class => null,
         OrderedImportsFixer::class => null,
         BinaryOperatorSpacesFixer::class => null,
@@ -61,7 +58,6 @@ class CommonAdditionalRules extends Rules implements AdditionalRules
                 "square_brace_block",
             ],
         ],
-        OperatorSpacingSniff::class => null,
         TrailingCommaInMultilineFixer::class => [
             "elements" => [
                 "arrays",

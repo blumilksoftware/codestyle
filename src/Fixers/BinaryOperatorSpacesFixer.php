@@ -10,7 +10,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
 use SplFileInfo;
 
-class BinaryOperatorSpacesFixer extends FixerWorkaround
+final class BinaryOperatorSpacesFixer extends FixerWorkaround
 {
     protected BaseBinaryOperatorSpacesFixer $fixer;
 

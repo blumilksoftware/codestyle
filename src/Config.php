@@ -12,9 +12,11 @@ use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\SetLists;
 use Blumilk\Codestyle\Configuration\SkippedRules;
+use Blumilk\Codestyle\Fixers\CustomFixers;
 use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator as Container;
-use Symplify\EasyCodingStandard\ValueObject\Option;
+use PhpCsFixer\Config as PhpCsFixerConfig;
+use PhpCsFixer\Finder;
+use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 
 class Config
 {
@@ -35,27 +37,21 @@ class Config
         $this->rules = $rules ?? new CommonAdditionalRules();
     }
 
-    public function config(): callable
+    public function config(): PhpCsFixerConfig
     {
         list("paths" => $paths, "sets" => $sets, "skipped" => $skipped, "rules" => $rules) = $this->options();
 
-        return static function (Container $container) use ($sets, $skipped, $rules, $paths): void {
-            $parameters = $container->parameters();
-            $parameters->set(Option::SKIP, $skipped);
-            $parameters->set(Option::PATHS, $paths);
+        $finder = Finder::create()
+            ->in(__DIR__)
+            ->name($paths);
 
-            foreach ($sets as $set) {
-                $container->import($set);
-            }
-
-            $services = $container->services();
-            foreach ($rules as $rule => $configuration) {
-                $service = $services->set($rule);
-                if ($configuration) {
-                    $service->call("configure", [$configuration]);
-                }
-            }
-        };
+        $config = new PhpCsFixerConfig("Blumilk codestyle standard");
+        return $config->setFinder($finder)
+            ->registerCustomFixers(new CustomFixers())
+            ->registerCustomFixers(new PhpCsFixerCustomFixers())
+            ->registerCustomFixers([])
+            ->setRiskyAllowed(true)
+            ->setRules($rules);
     }
 
     #[ArrayShape([
