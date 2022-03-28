@@ -60,7 +60,7 @@ class CodestyleTest extends TestCase
      */
     protected function runComposerEcsCommand(bool $fix = false): bool
     {
-        $command = $fix ? "ecsf-tmp" : "ecs-tmp";
+        $command = $fix ? "csf-tmp" : "cs-tmp";
         $result = 0;
         $output = null;
 

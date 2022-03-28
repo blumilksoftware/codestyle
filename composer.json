@@ -30,12 +30,12 @@
     }
   },
   "scripts": {
-    "ecs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
-    "ecsf": "./vendor/bin/ecs check --fix",
+    "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
+    "csf": "./vendor/bin/ecs check --fix",
     "test": "./vendor/bin/phpunit tests --colors always",
     "unit": "./vendor/bin/phpunit tests/unit --colors always",
     "e2e": "./vendor/bin/phpunit tests/codestyle --colors always",
-    "ecs-tmp": "./vendor/bin/ecs check --config ./tests/codestyle/config.php",
-    "ecsf-tmp": "./vendor/bin/ecs check --config ./tests/codestyle/config.php --fix"
+    "cs-tmp": "./vendor/bin/ecs check --config ./tests/codestyle/config.php",
+    "csf-tmp": "./vendor/bin/ecs check --config ./tests/codestyle/config.php --fix"
   }
 }

@@ -9,7 +9,7 @@ Add package to our project:
 composer require blumilksoftware/codestyle --dev
 ```
 
-Then create `ecs.php` file in your project's root directory:
+Then create `codestyle.php` file in your project's root directory:
 ```php
 <?php
 
@@ -62,20 +62,20 @@ Add scripts to your `composer.json` file:
 ```json
 {
   "scripts": {
-    "ecs": "./vendor/bin/ecs check",
-    "ecsf": "./vendor/bin/ecs check --fix"
+    "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
+    "csf": "./vendor/bin/ecs check --fix"
   }
 }
 ```
 
 Then run following command to check codestyle:
 ```shell
-composer ecs
+composer cs
 ```
 
 or following to fix found errors:
 ```shell
-composer ecsf
+composer csf
 ```
 
 ### Contributing
@@ -87,8 +87,8 @@ composer install
 
 There are scripts available for package codestyle checking and testing:
 ```shell
-composer ecs
-composer ecsf
+composer cs
+composer csf
 composer test
 ```
 
