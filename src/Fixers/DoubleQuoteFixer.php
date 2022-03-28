@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Fixers;
 
-use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
-final class DoubleQuoteFixer extends AbstractFixer
+final class DoubleQuoteFixer implements FixerInterface
 {
     public function getDefinition(): FixerDefinition
     {
@@ -55,5 +55,32 @@ EOF;
                 $tokens[$index] = new Token([T_CONSTANT_ENCAPSED_STRING, $prefix . "\"" . $content . "\""]);
             }
         }
+    }
+
+    public function isRisky(): bool
+    {
+        return false;
+    }
+
+    public function fix(SplFileInfo $file, Tokens $tokens): void
+    {
+        if (0 < $tokens->count() && $this->isCandidate($tokens) && $this->supports($file)) {
+            $this->applyFix($file, $tokens);
+        }
+    }
+
+    public function getName(): string
+    {
+        return "Blumilk/double_quote";
+    }
+
+    public function getPriority(): int
+    {
+        return 0;
+    }
+
+    public function supports(SplFileInfo $file): bool
+    {
+        return true;
     }
 }

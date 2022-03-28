@@ -12,7 +12,7 @@ use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\SetLists;
 use Blumilk\Codestyle\Configuration\SkippedRules;
-use Blumilk\Codestyle\Fixers\CustomFixers;
+use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use JetBrains\PhpStorm\ArrayShape;
 use PhpCsFixer\Config as PhpCsFixerConfig;
 use PhpCsFixer\Finder;
@@ -47,9 +47,8 @@ class Config
 
         $config = new PhpCsFixerConfig("Blumilk codestyle standard");
         return $config->setFinder($finder)
-            ->registerCustomFixers(new CustomFixers())
             ->registerCustomFixers(new PhpCsFixerCustomFixers())
-            ->registerCustomFixers([])
+            ->registerCustomFixers([new DoubleQuoteFixer()])
             ->setRiskyAllowed(true)
             ->setRules($rules);
     }
