@@ -11,20 +11,23 @@ use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
+use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
+use PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer;
+use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
 use PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer;
 use PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer;
 use PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
+use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
-use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
@@ -32,11 +35,14 @@ use PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
+use PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer;
+use PhpCsFixer\Fixer\NamespaceNotation\CleanNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
@@ -44,6 +50,7 @@ use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
 use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
 use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
 use PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer;
+use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer;
@@ -67,8 +74,8 @@ use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer;
-use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
+use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
@@ -97,13 +104,11 @@ class CommonRules extends Rules implements RulesContract
         ExplicitIndirectVariableFixer::class => true,
         SingleClassElementPerStatementFixer::class => ["elements" => ["const", "property"]],
         NewWithBracesFixer::class => true,
-        ClassDefinitionFixer::class => ["single_line" => \true],
+        ClassDefinitionFixer::class => ["single_line" => true],
         StandardizeIncrementFixer::class => true,
         SelfAccessorFixer::class => true,
         MagicConstantCasingFixer::class => true,
         NoUselessElseFixer::class => true,
-        SingleQuoteFixer::class => true,
-        YodaStyleFixer::class => ["equal" => \false, "identical" => \false, "less_and_greater" => \false],
         OrderedClassElementsFixer::class => true,
         NoTrailingWhitespaceInCommentFixer::class => true,
         PhpdocTrimConsecutiveBlankLineSeparationFixer::class => true,
@@ -114,14 +119,14 @@ class CommonRules extends Rules implements RulesContract
         PhpdocTypesFixer::class => true,
         PhpdocReturnSelfReferenceFixer::class => true,
         PhpdocVarWithoutNameFixer::class => true,
-        NoSuperfluousPhpdocTagsFixer::class => ["remove_inheritdoc" => \true, "allow_mixed" => \true],
+        NoSuperfluousPhpdocTagsFixer::class => ["remove_inheritdoc" => true, "allow_mixed" => true],
         SingleBlankLineBeforeNamespaceFixer::class => true,
         PhpUnitTestAnnotationFixer::class => true,
         PhpUnitSetUpTearDownVisibilityFixer::class => true,
         BlankLineAfterOpeningTagFixer::class => true,
         MethodChainingIndentationFixer::class => true,
         ConcatSpaceFixer::class => ["spacing" => "one"],
-        BinaryOperatorSpacesFixer::class => ["operators" => ["=>" => "single_space", "=" => "single_space"]],
+        BinaryOperatorSpacesFixer::class => ["operators" => ["=>" => "single_space", "=" => "single_space", "&" => "no_space"]],
         SingleTraitInsertPerStatementFixer::class => true,
         FunctionTypehintSpaceFixer::class => true,
         NoBlankLinesAfterClassOpeningFixer::class => true,
@@ -184,5 +189,14 @@ class CommonRules extends Rules implements RulesContract
         SingleSpaceAfterStatementFixer::class => null,
         SingleSpaceBeforeStatementFixer::class => null,
         StringableInterfaceFixer::class => null,
+        VisibilityRequiredFixer::class => null,
+        NoLeadingImportSlashFixer::class => null,
+        LowercaseCastFixer::class => null,
+        LowercaseStaticReferenceFixer::class => null,
+        CompactNullableTypehintFixer::class => null,
+        DeclareEqualNormalizeFixer::class => null,
+        ShortScalarCastFixer::class => null,
+        CleanNamespaceFixer::class => null,
+        UnaryOperatorSpacesFixer::class => null,
     ];
 }

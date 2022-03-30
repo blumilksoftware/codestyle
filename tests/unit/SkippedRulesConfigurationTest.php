@@ -5,29 +5,26 @@ declare(strict_types=1);
 use Blumilk\Codestyle\Config;
 use Blumilk\Codestyle\Configuration\Defaults\CommonSkippedRules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
+use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
-use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
-use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
-use PhpCsFixer\Fixer\Operator\LogicalOperatorsFixer;
-use PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer;
-use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
-use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
+use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PHPUnit\Framework\TestCase;
 
 class SkippedRulesConfigurationTest extends TestCase
 {
     public function testSkippedRulesConfiguration(): void
     {
-        $skipped = new CommonSkippedRules();
+        $skipped = new class() extends CommonSkippedRules {
+            protected array $rules = [
+                DoubleQuoteFixer::class => null,
+            ];
+        };
+
         $config = new Config(skipped: $skipped);
 
         $this->assertSame(
             [
-                SingleQuoteFixer::class => null,
-                ClassAttributesSeparationFixer::class => null,
-                NotOperatorWithSuccessorSpaceFixer::class => null,
-                ReturnAssignmentFixer::class => null,
-                BinaryOperatorSpacesFixer::class => null,
+                "Blumilk/double_quote" => true
             ],
             $config->options()["skipped"],
         );
@@ -35,7 +32,11 @@ class SkippedRulesConfigurationTest extends TestCase
 
     public function testClearingSkippedRulesConfiguration(): void
     {
-        $skipped = new CommonSkippedRules();
+        $skipped = new class() extends CommonSkippedRules {
+            protected array $rules = [
+                DoubleQuoteFixer::class => null,
+            ];
+        };
         $config = new Config(skipped: $skipped->clear());
 
         $this->assertSame([], $config->options()["skipped"]);
@@ -43,14 +44,18 @@ class SkippedRulesConfigurationTest extends TestCase
 
     public function testFilteringSkippedRulesConfiguration(): void
     {
-        $skipped = new CommonSkippedRules();
-        $config = new Config(skipped: $skipped->filter(ReturnAssignmentFixer::class, SingleQuoteFixer::class));
+        $skipped = new class() extends CommonSkippedRules {
+            protected array $rules = [
+                DoubleQuoteFixer::class => null,
+                NoWhitespaceBeforeCommaInArrayFixer::class => true,
+            ];
+        };
+
+        $config = new Config(skipped: $skipped->filter(NoWhitespaceBeforeCommaInArrayFixer::class));
 
         $this->assertSame(
             [
-                ClassAttributesSeparationFixer::class => null,
-                NotOperatorWithSuccessorSpaceFixer::class => null,
-                BinaryOperatorSpacesFixer::class => null,
+                "Blumilk/double_quote" => true
             ],
             $config->options()["skipped"],
         );
@@ -58,19 +63,19 @@ class SkippedRulesConfigurationTest extends TestCase
 
     public function testExtendingSkippedRulesConfiguration(): void
     {
-        $skipped = new CommonSkippedRules();
+        $skipped = new class() extends CommonSkippedRules {
+            protected array $rules = [
+                DoubleQuoteFixer::class => null,
+            ];
+        };
         $config = new Config(
-            skipped: $skipped->add(new Rule(LogicalOperatorsFixer::class)),
+            skipped: $skipped->add(new Rule(NoWhitespaceBeforeCommaInArrayFixer::class)),
         );
 
         $this->assertSame(
             [
-                SingleQuoteFixer::class => null,
-                ClassAttributesSeparationFixer::class => null,
-                NotOperatorWithSuccessorSpaceFixer::class => null,
-                ReturnAssignmentFixer::class => null,
-                BinaryOperatorSpacesFixer::class => null,
-                LogicalOperatorsFixer::class => null,
+                "Blumilk/double_quote" => true,
+                "no_whitespace_before_comma_in_array" => true,
             ],
             $config->options()["skipped"],
         );
@@ -78,19 +83,19 @@ class SkippedRulesConfigurationTest extends TestCase
 
     public function testExtendingWithOptionsSkippedRulesConfiguration(): void
     {
-        $skipped = new CommonSkippedRules();
+        $skipped = new class() extends CommonSkippedRules {
+            protected array $rules = [
+                DoubleQuoteFixer::class => null,
+            ];
+        };
         $config = new Config(
-            skipped: $skipped->add(new Rule(ArraySyntaxFixer::class, [__DIR__ . "/test"])),
+            skipped: $skipped->add(new Rule(ArraySyntaxFixer::class, ["syntax" => "short"])),
         );
 
         $this->assertSame(
             [
-                SingleQuoteFixer::class => null,
-                ClassAttributesSeparationFixer::class => null,
-                NotOperatorWithSuccessorSpaceFixer::class => null,
-                ReturnAssignmentFixer::class => null,
-                BinaryOperatorSpacesFixer::class => null,
-                ArraySyntaxFixer::class => [__DIR__ . "/test"],
+                "Blumilk/double_quote" => true,
+                "array_syntax" => ["syntax" => "short"],
             ],
             $config->options()["skipped"],
         );

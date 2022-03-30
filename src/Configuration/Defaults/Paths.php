@@ -63,6 +63,10 @@ class Paths implements PathsContract
             return;
         }
 
+        if (!is_dir($path)) {
+            return;
+        }
+
         $files = array_diff(scandir($path), [".", ".."]);
 
         foreach ($files as $file) {

@@ -9,11 +9,9 @@ $config = new Config(
     paths: new Paths(
         "codestyle.php",
         "src",
-//        "tests/unit",
-//        "tests/codestyle/CodestyleTest.php",
-//        "tests/codestyle/config.php",
-//        "tests/codestyle/fixtures/noExtraBlankLines/actual.php",
-//        "tests/codestyle/fixtures/enums/actual.php",
+        "tests/unit",
+        "tests/codestyle/CodestyleTest.php",
+        "tests/codestyle/config.php",
     ),
 );
 

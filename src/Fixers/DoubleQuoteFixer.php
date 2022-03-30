@@ -63,7 +63,7 @@ EOF;
     protected function applyFix(SplFileInfo $file, Tokens $tokens): void
     {
         foreach ($tokens as $index => $token) {
-            if (! $token->isGivenKind(T_CONSTANT_ENCAPSED_STRING)) {
+            if (!$token->isGivenKind(T_CONSTANT_ENCAPSED_STRING)) {
                 continue;
             }
 
@@ -71,9 +71,9 @@ EOF;
             $prefix = "";
             if (
                 $content[0] === "'" &&
-                ! str_contains($content, '"') &&
+                !str_contains($content, '"') &&
                 // regex: odd number of backslashes, not followed by double quote or dollar
-                ! preg_match("/(?<!\\\\)(?:\\\\{2})*\\\\(?!['$\\\\])/", $content)
+                !preg_match("/(?<!\\\\)(?:\\\\{2})*\\\\(?!['$\\\\])/", $content)
             ) {
                 $content = substr($content, 1, -1);
                 $content = str_replace("\\'", "'", $content);

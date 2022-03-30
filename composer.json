@@ -9,7 +9,7 @@
     "kubawerlos/php-cs-fixer-custom-fixers": "^3.7"
   },
   "require-dev": {
-    "composer/composer": "2.3.0-RC2",
+    "composer/composer": "2.3.0",
     "jetbrains/phpstorm-attributes": "^1.0",
     "phpunit/phpunit": "^9.5",
     "symfony/console": "^6.0"
