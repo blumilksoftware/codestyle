@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Blumilk\Codestyle;
 
 use Blumilk\Codestyle\Configuration\Defaults\CommonRules;
-use Blumilk\Codestyle\Configuration\Defaults\CommonSkippedRules;
 use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\Rules;
-use Blumilk\Codestyle\Configuration\SkippedRules;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use JetBrains\PhpStorm\ArrayShape;
 use PhpCsFixer\Config as PhpCsFixerConfig;
@@ -19,28 +17,30 @@ use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 class Config
 {
     protected Paths $paths;
-    protected SkippedRules $skipped;
     protected Rules $rules;
+    protected string $rootPath;
 
     public function __construct(
         ?Paths $paths = null,
         ?Rules $rules = null,
-        ?SkippedRules $skipped = null,
+        ?Rules $rootPath = null,
     ) {
         $this->paths = $paths ?? new LaravelPaths();
         $this->rules = $rules ?? new CommonRules();
-        $this->skipped = $skipped ?? new CommonSkippedRules();
+        $this->rootPath = $rootPath ?? getcwd();
     }
 
     public function config(): PhpCsFixerConfig
     {
-        list("paths" => $paths, "skipped" => $skipped, "rules" => $rules) = $this->options();
+        list("paths" => $paths, "rules" => $rules) = $this->options();
 
-        $finder = Finder::create()->directories()->append($paths);
-
-        foreach ($skipped as $rule) {
-            unset($rules[$rule]);
+        $files = [];
+        foreach ($paths as $path) {
+            $directory = $this->rootPath . "/" . $path;
+            $this->getAllFiles($files, $directory);
         }
+
+        $finder = Finder::create()->directories()->append($files);
 
         $config = new PhpCsFixerConfig("Blumilk codestyle standard");
         return $config->setFinder($finder)
@@ -51,17 +51,32 @@ class Config
             ->setRules($rules);
     }
 
-    #[ArrayShape([
-        "paths" => "array",
-        "skipped" => "array",
-        "rules" => "array",
-    ])]
+    #[ArrayShape(["paths" => "array", "rules" => "array"])]
     public function options(): array
     {
         return [
             "paths" => $this->paths->get(),
-            "skipped" => $this->skipped->get(),
             "rules" => $this->rules->get(),
         ];
+    }
+
+    protected function getAllFiles(array &$paths, string $path): void
+    {
+        if (is_file($path) || !is_dir($path)) {
+            $paths[] = $path;
+            return;
+        }
+
+        $files = array_diff(scandir($path), [".", ".."]);
+
+        foreach ($files as $file) {
+            $directory = $path . "/" . $file;
+
+            if (is_file($directory)) {
+                $paths[] = $directory;
+            } else {
+                $this->getAllFiles($paths, $directory);
+            }
+        }
     }
 }

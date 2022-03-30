@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
-use Blumilk\Codestyle\Configuration\Rules as RulesContract;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
@@ -89,7 +88,7 @@ use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
 
-class CommonRules extends Rules implements RulesContract
+class CommonRules extends Rules
 {
     protected array $rules = [
         NoWhitespaceBeforeCommaInArrayFixer::class => true,

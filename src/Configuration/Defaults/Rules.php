@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
+use Blumilk\Codestyle\Configuration\Rules as RulesContract;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
 use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
-abstract class Rules
+abstract class Rules implements RulesContract
 {
     protected array $rules = [];
 

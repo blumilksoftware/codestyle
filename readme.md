@@ -17,13 +17,11 @@ declare(strict_types=1);
 
 use Blumilk\Codestyle\Config;
 
-$config = new Config();
-
-return $config->config();
+return new Config();
 ```
 
 #### Configuration
-You can configure paths, set lists, skipped and additional rules in `Config` constructor:
+You can configure paths and rules in `Config` class constructor:
 ```php
 <?php
 
@@ -48,6 +46,23 @@ Or:
 declare(strict_types=1);
 
 use Blumilk\Codestyle\Config;
+use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
+
+$config = new Config(
+    paths: new LaravelPaths(LaravelPaths::LARAVEL_8_PATHS),
+);
+
+return $config->config();
+```
+
+
+Or:
+```php
+<?php
+
+declare(strict_types=1);
+
+use Blumilk\Codestyle\Config;
 use Blumilk\Codestyle\Configuration\Defaults\Paths;
 
 $config = new Config(
@@ -63,7 +78,7 @@ Add scripts to your `composer.json` file:
 {
   "scripts": {
     "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
-    "csf": "./vendor/bin/ecs check --fix"
+    "csf":  "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php"
   }
 }
 ```
@@ -78,6 +93,16 @@ or following to fix found errors:
 composer csf
 ```
 
+#### Upgrading guide from 0.x
+With version 1.x we removed `symplify/easy-coding-standard` dependency in the project. The checklist for updating old projects is as follows:
+- [ ] update the main dependency `blumilksoftware/codestyle` to version `^1.0` in `composer.json` file
+- [ ] run `composer update blumilksoftware/codestyle -W`
+- [ ] rename `ecs.php` to `codestyle.php`
+- [ ] update scripts in `composer.json` file
+- [ ] update scripts in Github Actions
+- [ ] the constructor of `Blumilk\Codestyle\Config` lost two parameters: `$sets` and `$skipped`; all manipulations of rules should be done on base `$rules` list
+- [ ] `Blumilk\Codestyle\Configuration\Defaults\LaravelPaths` returns a default Laravel 9 directory schema; for Laravel 8 additional parameter `LaravelPaths::LARAVEL_8_PATHS` should be added
+
 ### Contributing
 In cloned or forked repository, run:
 ```shell
@@ -90,6 +115,8 @@ There are scripts available for package codestyle checking and testing:
 composer cs
 composer csf
 composer test
+composer unit
+composer e2e
 ```
 
 There is also the Docker Compose configuration available:
