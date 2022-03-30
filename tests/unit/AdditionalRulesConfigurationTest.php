@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Blumilk\Codestyle\Config;
-use Blumilk\Codestyle\Configuration\Defaults\CommonAdditionalRules;
+use Blumilk\Codestyle\Configuration\Defaults\CommonRules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
 use Blumilk\Codestyle\Fixers\BinaryOperatorSpacesFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
@@ -36,7 +36,7 @@ class AdditionalRulesConfigurationTest extends TestCase
 {
     public function testAdditionalRulesConfiguration(): void
     {
-        $rules = new CommonAdditionalRules();
+        $rules = new CommonRules();
         $config = new Config(rules: $rules);
 
         $this->assertSame(
@@ -94,7 +94,7 @@ class AdditionalRulesConfigurationTest extends TestCase
 
     public function testClearingAdditionalRulesConfiguration(): void
     {
-        $rules = new CommonAdditionalRules();
+        $rules = new CommonRules();
         $config = new Config(rules: $rules->clear());
 
         $this->assertSame([], $config->options()["rules"]);
@@ -102,7 +102,7 @@ class AdditionalRulesConfigurationTest extends TestCase
 
     public function testFilteringAdditionalRulesConfiguration(): void
     {
-        $rules = new CommonAdditionalRules();
+        $rules = new CommonRules();
         $config = new Config(rules: $rules->filter(CastSpacesFixer::class));
 
         $this->assertSame(
@@ -157,7 +157,7 @@ class AdditionalRulesConfigurationTest extends TestCase
 
     public function testExtendingAdditionalRulesConfiguration(): void
     {
-        $rules = new CommonAdditionalRules();
+        $rules = new CommonRules();
         $config = new Config(
             rules: $rules->add(new Rule(HeredocToNowdocFixer::class)),
         );
@@ -218,7 +218,7 @@ class AdditionalRulesConfigurationTest extends TestCase
 
     public function testExtendingWithOptionsAdditionalRulesConfiguration(): void
     {
-        $rules = new CommonAdditionalRules();
+        $rules = new CommonRules();
         $rule = new Rule(
             NoMixedEchoPrintFixer::class,
             [

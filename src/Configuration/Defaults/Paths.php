@@ -17,7 +17,13 @@ class Paths implements PathsContract
 
     public function get(): array
     {
-        return $this->paths;
+        $paths = [];
+        foreach ($this->paths as $path) {
+            $directory = getcwd() . "/" . $path;
+            $this->getAllFiles($paths, $directory);
+        }
+
+        return $paths;
     }
 
     public function add(string ...$paths): static
@@ -49,5 +55,24 @@ class Paths implements PathsContract
         $this->paths = array_values($this->paths);
 
         return $this;
+    }
+
+    protected function getAllFiles(array &$paths, string $path): void {
+        if (is_file($path)) {
+            $paths[] = $path;
+            return;
+        }
+
+        $files = array_diff(scandir($path), [".", ".."]);
+
+        foreach ($files as $file) {
+            $directory = $path . "/" . $file;
+
+            if (is_file($directory)) {
+                $paths[] = $directory;
+            } else {
+                $this->getAllFiles($paths, $directory);
+            }
+        }
     }
 }

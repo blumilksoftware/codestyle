@@ -33,30 +33,6 @@ EOF;
         return $tokens->isTokenKindFound(T_CONSTANT_ENCAPSED_STRING);
     }
 
-    protected function applyFix(SplFileInfo $file, Tokens $tokens): void
-    {
-        foreach ($tokens as $index => $token) {
-            if (!$token->isGivenKind(T_CONSTANT_ENCAPSED_STRING)) {
-                continue;
-            }
-
-            $content = $token->getContent();
-            $prefix = "";
-            if (
-                $content[0] === "'" &&
-                !str_contains($content, '"') &&
-                // regex: odd number of backslashes, not followed by double quote or dollar
-                !preg_match("/(?<!\\\\)(?:\\\\{2})*\\\\(?!['$\\\\])/", $content)
-            ) {
-                $content = substr($content, 1, -1);
-                $content = str_replace("\\'", "'", $content);
-                $content = str_replace("\\$", "$", $content);
-
-                $tokens[$index] = new Token([T_CONSTANT_ENCAPSED_STRING, $prefix . "\"" . $content . "\""]);
-            }
-        }
-    }
-
     public function isRisky(): bool
     {
         return false;
@@ -64,7 +40,7 @@ EOF;
 
     public function fix(SplFileInfo $file, Tokens $tokens): void
     {
-        if (0 < $tokens->count() && $this->isCandidate($tokens) && $this->supports($file)) {
+        if ($tokens->count() > 0 && $this->isCandidate($tokens) && $this->supports($file)) {
             $this->applyFix($file, $tokens);
         }
     }
@@ -82,5 +58,29 @@ EOF;
     public function supports(SplFileInfo $file): bool
     {
         return true;
+    }
+
+    protected function applyFix(SplFileInfo $file, Tokens $tokens): void
+    {
+        foreach ($tokens as $index => $token) {
+            if (! $token->isGivenKind(T_CONSTANT_ENCAPSED_STRING)) {
+                continue;
+            }
+
+            $content = $token->getContent();
+            $prefix = "";
+            if (
+                $content[0] === "'" &&
+                ! str_contains($content, '"') &&
+                // regex: odd number of backslashes, not followed by double quote or dollar
+                ! preg_match("/(?<!\\\\)(?:\\\\{2})*\\\\(?!['$\\\\])/", $content)
+            ) {
+                $content = substr($content, 1, -1);
+                $content = str_replace("\\'", "'", $content);
+                $content = str_replace("$", "$", $content);
+
+                $tokens[$index] = new Token([T_CONSTANT_ENCAPSED_STRING, $prefix . '"' . $content . '"']);
+            }
+        }
     }
 }

@@ -34,8 +34,6 @@
     "csf":  "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
     "test": "./vendor/bin/phpunit tests --colors always",
     "unit": "./vendor/bin/phpunit tests/unit --colors always",
-    "e2e": "./vendor/bin/phpunit tests/codestyle --colors always",
-    "cs-tmp": "./vendor/bin/php-cs-fixer fix --dry-run --config ./tests/codestyle/config.php",
-    "csf-tmp": "./vendor/bin/php-cs-fixer fix --config ./tests/codestyle/config.php --fix"
+    "e2e": "./vendor/bin/phpunit tests/codestyle --colors always"
   }
 }
