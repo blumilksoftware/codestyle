@@ -30,7 +30,7 @@
   },
   "scripts": {
     "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
-    "csf":  "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
+    "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
     "test": "./vendor/bin/phpunit tests --colors always",
     "unit": "./vendor/bin/phpunit tests/unit --colors always",
     "e2e": "./vendor/bin/phpunit tests/codestyle --colors always"

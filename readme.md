@@ -78,7 +78,7 @@ Add scripts to your `composer.json` file:
 {
   "scripts": {
     "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
-    "csf":  "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php"
+    "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php"
   }
 }
 ```

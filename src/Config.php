@@ -46,7 +46,7 @@ class Config
         return $config->setFinder($finder)
             ->setUsingCache(false)
             ->registerCustomFixers(new PhpCsFixerCustomFixers())
-            ->registerCustomFixers([new DoubleQuoteFixer()])
+            ->registerCustomFixers($this->getCustomFixers())
             ->setRiskyAllowed(true)
             ->setRules($rules);
     }
@@ -78,5 +78,12 @@ class Config
                 $this->getAllFiles($paths, $directory);
             }
         }
+    }
+
+    protected function getCustomFixers(): array
+    {
+        return [
+            new DoubleQuoteFixer(),
+        ];
     }
 }
