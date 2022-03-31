@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Console\Application;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class CodestyleTest extends TestCase
 {
@@ -23,7 +26,6 @@ class CodestyleTest extends TestCase
     public function testPhp80Fixtures(): void
     {
         $fixtures = [
-            "noExtraBlankLines",
             "noExtraBlankLines",
             "nullableTypeForDefaultNull",
             "operatorSpacing",
@@ -58,13 +60,15 @@ class CodestyleTest extends TestCase
     /**
      * @throws Exception
      */
-    protected function runComposerEcsCommand(bool $fix = false): bool
+    protected function runFixer(bool $fix = false): bool
     {
-        $command = $fix ? "ecsf-tmp" : "ecs-tmp";
-        $result = 0;
-        $output = null;
+        $dryRun = $fix ? "" : "--dry-run";
 
-        exec("./vendor/bin/composer " . $command . " 2> /dev/null", $output, $result);
+        $application = new Application();
+        $application->setAutoExit(false);
+
+        $output = new BufferedOutput();
+        $result = $application->run(new StringInput("fix ${dryRun} --diff --config ./tests/codestyle/config.php"), $output);
 
         return $result === 0;
     }
@@ -76,9 +80,21 @@ class CodestyleTest extends TestCase
     {
         copy(__DIR__ . "/fixtures/${name}/actual.php", __DIR__ . "/tmp/${name}.php");
 
-        $this->assertFalse($this->runComposerEcsCommand(), "Fixture fixtures/${name} returned invalid true result.");
-        $this->assertTrue($this->runComposerEcsCommand(true), "Fixture fixtures/${name} was not proceeded properly.");
-        $this->assertFileEquals(__DIR__ . "/fixtures/${name}/expected.php", __DIR__ . "/tmp/${name}.php", "Result of proceeded fixture fixtures/${name} is not equal to expected.");
+        $this->assertFalse(
+            $this->runFixer(),
+            "Fixture fixtures/${name} returned invalid true result.",
+        );
+
+        $this->assertTrue(
+            $this->runFixer(fix: true),
+            "Fixture fixtures/${name} was not proceeded properly.",
+        );
+
+        $this->assertFileEquals(
+            __DIR__ . "/fixtures/${name}/expected.php",
+            __DIR__ . "/tmp/${name}.php",
+            "Result of proceeded fixture fixtures/${name} is not equal to expected.",
+        );
     }
 
     protected function clearTempDirectory(): void

@@ -7,7 +7,7 @@ use Blumilk\Codestyle\Configuration\Defaults\Paths;
 
 $config = new Config(
     paths: new Paths(
-        "ecs.php",
+        "codestyle.php",
         "src",
         "tests/unit",
         "tests/codestyle/CodestyleTest.php",

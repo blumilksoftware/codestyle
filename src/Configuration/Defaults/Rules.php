@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
+use Blumilk\Codestyle\Configuration\Rules as RulesContract;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
+use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
-class Rules
+abstract class Rules implements RulesContract
 {
     protected array $rules = [];
 
     public function get(): array
     {
-        return $this->rules;
+        $rules = [];
+        foreach ($this->rules as $fixer => $options) {
+            /** @var AbstractFixer $fixer */
+            $fixer = new $fixer();
+            $rules[$fixer->getName()] = $options === null ? true : $options;
+        }
+
+        return $rules;
     }
 
     public function add(Rule ...$rules): static

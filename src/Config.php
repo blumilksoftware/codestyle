@@ -4,73 +4,86 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle;
 
-use Blumilk\Codestyle\Configuration\AdditionalRules;
-use Blumilk\Codestyle\Configuration\Defaults\CommonAdditionalRules;
-use Blumilk\Codestyle\Configuration\Defaults\CommonSetLists;
-use Blumilk\Codestyle\Configuration\Defaults\CommonSkippedRules;
+use Blumilk\Codestyle\Configuration\Defaults\CommonRules;
 use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
-use Blumilk\Codestyle\Configuration\SetLists;
-use Blumilk\Codestyle\Configuration\SkippedRules;
+use Blumilk\Codestyle\Configuration\Rules;
+use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator as Container;
-use Symplify\EasyCodingStandard\ValueObject\Option;
+use PhpCsFixer\Config as PhpCsFixerConfig;
+use PhpCsFixer\Finder;
+use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 
 class Config
 {
     protected Paths $paths;
-    protected SetLists $sets;
-    protected SkippedRules $skipped;
-    protected AdditionalRules $rules;
+    protected Rules $rules;
+    protected string $rootPath;
 
     public function __construct(
         ?Paths $paths = null,
-        ?SetLists $sets = null,
-        ?SkippedRules $skipped = null,
-        ?AdditionalRules $rules = null,
+        ?Rules $rules = null,
+        ?Rules $rootPath = null,
     ) {
         $this->paths = $paths ?? new LaravelPaths();
-        $this->sets = $sets ?? new CommonSetLists();
-        $this->skipped = $skipped ?? new CommonSkippedRules();
-        $this->rules = $rules ?? new CommonAdditionalRules();
+        $this->rules = $rules ?? new CommonRules();
+        $this->rootPath = $rootPath ?? getcwd();
     }
 
-    public function config(): callable
+    public function config(): PhpCsFixerConfig
     {
-        list("paths" => $paths, "sets" => $sets, "skipped" => $skipped, "rules" => $rules) = $this->options();
+        list("paths" => $paths, "rules" => $rules) = $this->options();
 
-        return static function (Container $container) use ($sets, $skipped, $rules, $paths): void {
-            $parameters = $container->parameters();
-            $parameters->set(Option::SKIP, $skipped);
-            $parameters->set(Option::PATHS, $paths);
+        $files = [];
+        foreach ($paths as $path) {
+            $directory = $this->rootPath . "/" . $path;
+            $this->getAllFiles($files, $directory);
+        }
 
-            foreach ($sets as $set) {
-                $container->import($set);
-            }
+        $finder = Finder::create()->directories()->append($files);
 
-            $services = $container->services();
-            foreach ($rules as $rule => $configuration) {
-                $service = $services->set($rule);
-                if ($configuration) {
-                    $service->call("configure", [$configuration]);
-                }
-            }
-        };
+        $config = new PhpCsFixerConfig("Blumilk codestyle standard");
+        return $config->setFinder($finder)
+            ->setUsingCache(false)
+            ->registerCustomFixers(new PhpCsFixerCustomFixers())
+            ->registerCustomFixers($this->getCustomFixers())
+            ->setRiskyAllowed(true)
+            ->setRules($rules);
     }
 
-    #[ArrayShape([
-        "paths" => "array",
-        "sets" => "array",
-        "skipped" => "array",
-        "rules" => "array",
-    ])]
+    #[ArrayShape(["paths" => "array", "rules" => "array"])]
     public function options(): array
     {
         return [
             "paths" => $this->paths->get(),
-            "sets" => $this->sets->get(),
-            "skipped" => $this->skipped->get(),
             "rules" => $this->rules->get(),
+        ];
+    }
+
+    protected function getAllFiles(array &$paths, string $path): void
+    {
+        if (is_file($path) || !is_dir($path)) {
+            $paths[] = $path;
+            return;
+        }
+
+        $files = array_diff(scandir($path), [".", ".."]);
+
+        foreach ($files as $file) {
+            $directory = $path . "/" . $file;
+
+            if (is_file($directory)) {
+                $paths[] = $directory;
+            } else {
+                $this->getAllFiles($paths, $directory);
+            }
+        }
+    }
+
+    protected function getCustomFixers(): array
+    {
+        return [
+            new DoubleQuoteFixer(),
         ];
     }
 }

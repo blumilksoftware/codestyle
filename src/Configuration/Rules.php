@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Configuration;
 
-interface AdditionalRules
+interface Rules
 {
     public function get(): array;
 }
