@@ -63,7 +63,9 @@ class Config
     protected function getAllFiles(array &$paths, string $path): void
     {
         if (is_file($path) || !is_dir($path)) {
-            $paths[] = $path;
+            if (str_ends_with($path, ".php")) {
+                $paths[] = $path;
+            }
             return;
         }
 
@@ -71,12 +73,7 @@ class Config
 
         foreach ($files as $file) {
             $directory = $path . "/" . $file;
-
-            if (is_file($directory)) {
-                $paths[] = $directory;
-            } else {
-                $this->getAllFiles($paths, $directory);
-            }
+            $this->getAllFiles($paths, $directory);
         }
     }
 
