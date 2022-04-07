@@ -17,9 +17,7 @@ use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 class Config
 {
     protected Paths $paths;
-
     protected Rules $rules;
-
     protected string $rootPath;
 
     public function __construct(

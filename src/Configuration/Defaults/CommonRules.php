@@ -199,7 +199,15 @@ class CommonRules extends Rules
         ShortScalarCastFixer::class => null,
         CleanNamespaceFixer::class => null,
         UnaryOperatorSpacesFixer::class => null,
-        ClassAttributesSeparationFixer::class => true,
+        ClassAttributesSeparationFixer::class => [
+            "elements" => [
+                "property" => ClassAttributesSeparationFixer::SPACING_NONE,
+                "const" => ClassAttributesSeparationFixer::SPACING_ONE,
+                "method" => ClassAttributesSeparationFixer::SPACING_ONE,
+                "trait_import" => ClassAttributesSeparationFixer::SPACING_NONE,
+                "case" => ClassAttributesSeparationFixer::SPACING_NONE,
+            ],
+        ],
         NoUselessParenthesisFixer::class => true,
     ];
 }

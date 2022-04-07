@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 class classAttributesSeparationExample
 {
-    protected string $exampleA;
+    use ExampleTraitOne;
+    use ExampleTraitTwo;
 
+    protected string $exampleA;
     protected string $exampleB;
 
     public function testFunctionA(string $a): string
