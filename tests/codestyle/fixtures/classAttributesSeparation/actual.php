@@ -2,6 +2,9 @@
 
 class classAttributesSeparationExample
 {
+    protected string $exampleA;
+    protected string $exampleB;
+
     public function testFunctionA(string $a): string
     {
         return $a;
