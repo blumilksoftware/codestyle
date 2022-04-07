@@ -15,6 +15,7 @@ use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
+use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
 use PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer;
 use PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer;
@@ -197,5 +198,6 @@ class CommonRules extends Rules
         ShortScalarCastFixer::class => null,
         CleanNamespaceFixer::class => null,
         UnaryOperatorSpacesFixer::class => null,
+        ClassAttributesSeparationFixer::class => true,
     ];
 }
