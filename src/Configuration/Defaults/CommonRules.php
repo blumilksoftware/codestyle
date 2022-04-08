@@ -202,7 +202,7 @@ class CommonRules extends Rules
         ClassAttributesSeparationFixer::class => [
             "elements" => [
                 "property" => ClassAttributesSeparationFixer::SPACING_NONE,
-                "const" => ClassAttributesSeparationFixer::SPACING_ONE,
+                "const" => ClassAttributesSeparationFixer::SPACING_NONE,
                 "method" => ClassAttributesSeparationFixer::SPACING_ONE,
                 "trait_import" => ClassAttributesSeparationFixer::SPACING_NONE,
                 "case" => ClassAttributesSeparationFixer::SPACING_NONE,

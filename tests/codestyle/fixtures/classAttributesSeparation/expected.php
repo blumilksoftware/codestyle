@@ -7,6 +7,9 @@ class classAttributesSeparationExample
     use ExampleTraitOne;
     use ExampleTraitTwo;
 
+    public const EXAMPLE_CONST_A = "A";
+    public const EXAMPLE_CONST_B = "B";
+
     protected string $exampleA;
     protected string $exampleB;
 
