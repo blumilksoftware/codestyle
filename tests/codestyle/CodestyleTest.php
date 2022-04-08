@@ -34,6 +34,8 @@ class CodestyleTest extends TestCase
             "trailingCommas",
             "unionTypes",
             "references",
+            "classAttributesSeparation",
+            "noUselessParenthesisFixer",
         ];
 
         foreach ($fixtures as $fixture) {

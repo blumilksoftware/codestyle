@@ -15,6 +15,7 @@ use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
+use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
 use PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer;
 use PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer;
@@ -82,6 +83,7 @@ use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
 use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
@@ -197,5 +199,15 @@ class CommonRules extends Rules
         ShortScalarCastFixer::class => null,
         CleanNamespaceFixer::class => null,
         UnaryOperatorSpacesFixer::class => null,
+        ClassAttributesSeparationFixer::class => [
+            "elements" => [
+                "property" => ClassAttributesSeparationFixer::SPACING_NONE,
+                "const" => ClassAttributesSeparationFixer::SPACING_ONE,
+                "method" => ClassAttributesSeparationFixer::SPACING_ONE,
+                "trait_import" => ClassAttributesSeparationFixer::SPACING_NONE,
+                "case" => ClassAttributesSeparationFixer::SPACING_NONE,
+            ],
+        ],
+        NoUselessParenthesisFixer::class => true,
     ];
 }
