@@ -97,8 +97,7 @@ composer csf
 ```
 
 #### Upgrading guide from 0.x
-With version 1.x we removed `symplify/easy-coding-standard` dependency in the project. The checklist for updating old
-projects is as follows:
+With version 1.x we removed `symplify/easy-coding-standard` dependency in the project. The checklist for updating old projects is as follows:
 
 - [ ] update the main dependency `blumilksoftware/codestyle` to version `^1.0` in `composer.json` file
 - [ ] run `composer update blumilksoftware/codestyle -W`
