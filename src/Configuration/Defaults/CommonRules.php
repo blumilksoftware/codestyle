@@ -80,6 +80,7 @@ use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
+use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
@@ -209,5 +210,6 @@ class CommonRules extends Rules
             ],
         ],
         NoUselessParenthesisFixer::class => true,
+        SingleBlankLineAtEofFixer::class => true,
     ];
 }
