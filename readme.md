@@ -1,4 +1,8 @@
-![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/blumilksoftware/codestyle?style=for-the-badge) ![Packagist Version](https://img.shields.io/packagist/v/blumilksoftware/codestyle?style=for-the-badge) ![Packagist Downloads](https://img.shields.io/packagist/dt/blumilksoftware/codestyle?style=for-the-badge)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/blumilksoftware/codestyle?style=for-the-badge)](https://packagist.org/packages/blumilksoftware/codestyle)
+[![Packagist Version](https://img.shields.io/packagist/v/blumilksoftware/codestyle?style=for-the-badge)](https://packagist.org/packages/blumilksoftware/codestyle)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/blumilksoftware/codestyle?style=for-the-badge)](https://packagist.org/packages/blumilksoftware/codestyle/stats)
+
+![Logo](./logo.png)
 
 ## blumilksoftware/codebase
 A common codestyle helper for all Blumilk projects.
@@ -55,7 +59,6 @@ $config = new Config(
 return $config->config();
 ```
 
-
 Or:
 ```php
 <?php
@@ -94,7 +97,9 @@ composer csf
 ```
 
 #### Upgrading guide from 0.x
-With version 1.x we removed `symplify/easy-coding-standard` dependency in the project. The checklist for updating old projects is as follows:
+With version 1.x we removed `symplify/easy-coding-standard` dependency in the project. The checklist for updating old
+projects is as follows:
+
 - [ ] update the main dependency `blumilksoftware/codestyle` to version `^1.0` in `composer.json` file
 - [ ] run `composer update blumilksoftware/codestyle -W`
 - [ ] rename `ecs.php` to `codestyle.php`
@@ -111,13 +116,15 @@ composer install
 ```
 
 There are scripts available for package codestyle checking and testing:
-```shell
-composer cs
-composer csf
-composer test
-composer unit
-composer e2e
-```
+
+| Command         | Description                                                  |
+|-----------------|--------------------------------------------------------------|
+| `composer cs`   | Runs codestyle against the package itself                    | 
+| `composer csf`  | Runs codestyle with fixer enabled against the package itself | 
+| `composer test` | Runs all test cases                                          | 
+| `composer unit` | Runs tests for package features                              | 
+| `composer e2e`  | Runs tests for codestyle rules                               | 
+
 
 There is also the Docker Compose configuration available:
 ```shell
