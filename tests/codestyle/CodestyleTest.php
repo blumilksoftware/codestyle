@@ -5,7 +5,6 @@ declare(strict_types=1);
 use PhpCsFixer\Console\Application;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 class CodestyleTest extends TestCase
 {
@@ -69,8 +68,7 @@ class CodestyleTest extends TestCase
         $application = new Application();
         $application->setAutoExit(false);
 
-        $output = new BufferedOutput();
-        $result = $application->run(new StringInput("fix ${dryRun} --diff --config ./tests/codestyle/config.php"), $output);
+        $result = $application->run(new StringInput("fix ${dryRun} --diff --config ./tests/codestyle/config.php"));
 
         return $result === 0;
     }

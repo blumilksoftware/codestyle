@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+use Blumilk\Codestyle\Tools\CodestyleFileInitializer;
+use Blumilk\Codestyle\Tools\ComposerManifestScriptsInitializer;
+use PhpCsFixer\Console\Application;
+use Symfony\Component\Console\Input\StringInput;
+
+require_once __DIR__ . "/../autoload.php";
+
+if (isset($argv[1])) {
+    if ($argv[1] === "init") {
+        (new CodestyleFileInitializer())->run(getcwd());
+        (new ComposerManifestScriptsInitializer())->run(getcwd());
+        return;
+    }
+
+    if ($argv[1] === "csf") {
+        (new Application())->run(new StringInput("fix --diff --config codestyle.php"));
+        return;
+    }
+}
+
+(new Application())->run(new StringInput("fix --dry-run --diff --config codestyle.php"));

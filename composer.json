@@ -34,5 +34,8 @@
     "test": "./vendor/bin/phpunit tests --colors always",
     "unit": "./vendor/bin/phpunit tests/unit --colors always",
     "e2e": "./vendor/bin/phpunit tests/codestyle --colors always"
-  }
+  },
+  "bin": [
+    "bin/codestyle"
+  ]
 }
