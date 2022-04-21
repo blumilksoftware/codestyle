@@ -8,11 +8,6 @@ use Blumilk\Codestyle\Configuration\Defaults\Paths;
 $config = new Config(
     paths: new Paths(
         "codestyle.php",
-        "bin",
-        "src",
-        "tests/unit",
-        "tests/codestyle/CodestyleTest.php",
-        "tests/codestyle/config.php",
     ),
 );
 
