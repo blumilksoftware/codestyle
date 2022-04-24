@@ -37,6 +37,7 @@ class CodestyleTest extends TestCase
             "classAttributesSeparation",
             "noUselessParenthesisFixer",
             "laravelMigrations",
+            "phpdocs",
         ];
 
         foreach ($fixtures as $fixture) {
