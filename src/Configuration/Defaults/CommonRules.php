@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
@@ -81,11 +82,17 @@ use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
+use PhpCsFixerCustomFixers\Fixer\NoCommentedOutCodeFixer;
+use PhpCsFixerCustomFixers\Fixer\NoPhpStormGeneratedCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocNoSuperfluousParamFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocParamOrderFixer;
 use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
@@ -202,14 +209,23 @@ class CommonRules extends Rules
         UnaryOperatorSpacesFixer::class => null,
         ClassAttributesSeparationFixer::class => [
             "elements" => [
-                "property" => ClassAttributesSeparationFixer::SPACING_NONE,
-                "const" => ClassAttributesSeparationFixer::SPACING_NONE,
-                "method" => ClassAttributesSeparationFixer::SPACING_ONE,
-                "trait_import" => ClassAttributesSeparationFixer::SPACING_NONE,
-                "case" => ClassAttributesSeparationFixer::SPACING_NONE,
+                "property" => "none",
+                "const" => "none",
+                "method" => "one",
+                "trait_import" => "none",
+                "case" => "none",
             ],
         ],
         NoUselessParenthesisFixer::class => true,
         SingleBlankLineAtEofFixer::class => true,
+        NoLaravelMigrationsGeneratedCommentFixer::class => true,
+        CommentedOutFunctionFixer::class => [
+            "functions" => ["print_r", "var_dump", "var_export", "dd"],
+        ],
+        NoCommentedOutCodeFixer::class => true,
+        NoPhpStormGeneratedCommentFixer::class => true,
+        PhpdocNoIncorrectVarAnnotationFixer::class => true,
+        PhpdocNoSuperfluousParamFixer::class => true,
+        PhpdocParamOrderFixer::class => true,
     ];
 }

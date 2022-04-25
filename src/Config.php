@@ -9,6 +9,7 @@ use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\Rules;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use JetBrains\PhpStorm\ArrayShape;
 use PhpCsFixer\Config as PhpCsFixerConfig;
 use PhpCsFixer\Finder;
@@ -81,6 +82,7 @@ class Config
     {
         return [
             new DoubleQuoteFixer(),
+            new NoLaravelMigrationsGeneratedCommentFixer(),
         ];
     }
 }
