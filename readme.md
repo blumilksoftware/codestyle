@@ -13,7 +13,12 @@ Add package to our project:
 composer require blumilksoftware/codestyle --dev
 ```
 
-Then create `codestyle.php` file in your project's root directory:
+Then run following to create configuration file and add scripts to the `composer.json` file:
+```shell
+./vendor/bin/codestyle init
+```
+
+Or you can create `codestyle.php` file in your project's root directory:
 ```php
 <?php
 

@@ -75,7 +75,6 @@ use PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
-use PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
@@ -111,7 +110,6 @@ class CommonRules extends Rules
         ArraySyntaxFixer::class => ["syntax" => "short"],
         PhpUnitMethodCasingFixer::class => true,
         FunctionToConstantFixer::class => true,
-        ExplicitStringVariableFixer::class => true,
         ExplicitIndirectVariableFixer::class => true,
         SingleClassElementPerStatementFixer::class => ["elements" => ["const", "property"]],
         NewWithBracesFixer::class => true,
