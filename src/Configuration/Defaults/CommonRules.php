@@ -30,6 +30,7 @@ use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
+use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
@@ -229,5 +230,10 @@ class CommonRules extends Rules
         PhpdocParamOrderFixer::class => true,
         BracesFixer::class => null,
         NoSpacesInsideParenthesisFixer::class => null,
+        YodaStyleFixer::class => [
+            "equal" => false,
+            "identical" => false,
+            "less_and_greater" => false,
+        ],
     ];
 }

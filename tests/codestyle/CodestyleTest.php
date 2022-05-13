@@ -38,6 +38,7 @@ class CodestyleTest extends TestCase
             "noUselessParenthesisFixer",
             "laravelMigrations",
             "phpdocs",
+            "yodaStyle",
         ];
 
         foreach ($fixtures as $fixture) {
