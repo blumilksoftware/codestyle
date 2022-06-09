@@ -39,6 +39,8 @@ class CodestyleTest extends TestCase
             "laravelMigrations",
             "phpdocs",
             "yodaStyle",
+            "objectOperators",
+            "anonymousFunctions",
         ];
 
         foreach ($fixtures as $fixture) {
