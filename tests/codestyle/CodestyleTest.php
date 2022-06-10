@@ -35,12 +35,13 @@ class CodestyleTest extends TestCase
             "unionTypes",
             "references",
             "classAttributesSeparation",
-            "noUselessParenthesisFixer",
+            "uselessParenthesis",
             "laravelMigrations",
             "phpdocs",
             "yodaStyle",
             "objectOperators",
             "anonymousFunctions",
+            "namespaces",
         ];
 
         foreach ($fixtures as $fixture) {
