@@ -26,6 +26,7 @@ use PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
+use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer;
@@ -42,10 +43,12 @@ use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
+use PhpCsFixer\Fixer\Import\SingleLineAfterImportsFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer;
+use PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\CleanNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
@@ -241,5 +244,8 @@ class CommonRules extends Rules
         FunctionDeclarationFixer::class => [
             "closure_function_spacing" => "none",
         ],
+        SingleLineAfterImportsFixer::class => true,
+        SingleLineCommentSpacingFixer::class => true,
+        BlankLineAfterNamespaceFixer::class => true,
     ];
 }
