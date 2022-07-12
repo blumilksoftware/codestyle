@@ -193,6 +193,7 @@ class CommonRules extends Rules
                 "arrays",
                 "parameters",
                 "arguments",
+                "match",
             ],
         ],
         NullableTypeDeclarationForDefaultNullValueFixer::class => true,
