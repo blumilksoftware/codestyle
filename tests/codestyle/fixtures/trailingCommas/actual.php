@@ -25,4 +25,13 @@ class TrailingCommasExample
             3
         ];
     }
+
+    public function match(int $i): int
+    {
+        return match ($i) {
+            1 => 1,
+            2 => 3,
+            default => 0
+        };
+    }
 }
