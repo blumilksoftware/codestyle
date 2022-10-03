@@ -14,7 +14,7 @@ class TrailingCommasExample
         string $a,
         string $b
     ): string {
-        return "${a}-${b}";
+        return "{$a}-{$b}";
     }
 
     public function testArrays(): array
