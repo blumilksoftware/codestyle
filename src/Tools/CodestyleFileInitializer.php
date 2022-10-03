@@ -8,7 +8,7 @@ class CodestyleFileInitializer
 {
     public function run(string $root, string $filename = "codestyle.php"): void
     {
-        $codestyleFilePath = "${root}/${filename}";
+        $codestyleFilePath = "{$root}/{$filename}";
 
         if (file_exists($codestyleFilePath)) {
             fwrite(STDERR, "File codestyle.php already exists.\n");

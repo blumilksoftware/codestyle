@@ -8,7 +8,7 @@ class ComposerManifestScriptsInitializer
 {
     public function run(string $root): void
     {
-        $composerManifestFile = "${root}/composer.json";
+        $composerManifestFile = "{$root}/composer.json";
 
         $hasComposerFileChanged = false;
         $composer = json_decode(file_get_contents($composerManifestFile), associative: true);
@@ -19,10 +19,10 @@ class ComposerManifestScriptsInitializer
 
         foreach ($scripts as $command => $script) {
             if (isset($composer["scripts"][$command])) {
-                fwrite(STDOUT, "Script ${command} is already declared.\n");
+                fwrite(STDOUT, "Script {$command} is already declared.\n");
             } else {
                 $composer["scripts"][$command] = $script;
-                fwrite(STDOUT, "Script ${command} has been added to composer.json file.\n");
+                fwrite(STDOUT, "Script {$command} has been added to composer.json file.\n");
                 $hasComposerFileChanged = true;
             }
         }

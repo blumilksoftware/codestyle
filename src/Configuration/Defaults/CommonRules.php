@@ -81,6 +81,7 @@ use PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
+use PhpCsFixer\Fixer\StringNotation\SimpleToComplexStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
@@ -248,5 +249,6 @@ class CommonRules extends Rules
         SingleLineAfterImportsFixer::class => true,
         SingleLineCommentSpacingFixer::class => true,
         BlankLineAfterNamespaceFixer::class => true,
+        SimpleToComplexStringVariableFixer::class => true,
     ];
 }

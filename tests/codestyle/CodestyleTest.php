@@ -76,7 +76,7 @@ class CodestyleTest extends TestCase
         $application->setAutoExit(false);
 
         $output = new BufferedOutput();
-        $result = $application->run(new StringInput("fix ${dryRun} --diff --config ./tests/codestyle/config.php"), $output);
+        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/config.php"), $output);
 
         return $result === 0;
     }
@@ -86,22 +86,22 @@ class CodestyleTest extends TestCase
      */
     protected function testFixture(string $name): void
     {
-        copy(__DIR__ . "/fixtures/${name}/actual.php", __DIR__ . "/tmp/${name}.php");
+        copy(__DIR__ . "/fixtures/{$name}/actual.php", __DIR__ . "/tmp/{$name}.php");
 
         $this->assertFalse(
             $this->runFixer(),
-            "Fixture fixtures/${name} returned invalid true result.",
+            "Fixture fixtures/{$name} returned invalid true result.",
         );
 
         $this->assertTrue(
             $this->runFixer(fix: true),
-            "Fixture fixtures/${name} was not proceeded properly.",
+            "Fixture fixtures/{$name} was not proceeded properly.",
         );
 
         $this->assertFileEquals(
-            __DIR__ . "/fixtures/${name}/expected.php",
-            __DIR__ . "/tmp/${name}.php",
-            "Result of proceeded fixture fixtures/${name} is not equal to expected.",
+            __DIR__ . "/fixtures/{$name}/expected.php",
+            __DIR__ . "/tmp/{$name}.php",
+            "Result of proceeded fixture fixtures/{$name} is not equal to expected.",
         );
     }
 
