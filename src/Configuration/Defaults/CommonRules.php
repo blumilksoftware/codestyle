@@ -245,6 +245,7 @@ class CommonRules extends Rules
         ObjectOperatorWithoutWhitespaceFixer::class => true,
         FunctionDeclarationFixer::class => [
             "closure_function_spacing" => "none",
+            "closure_fn_spacing" => "none",
         ],
         SingleLineAfterImportsFixer::class => true,
         SingleLineCommentSpacingFixer::class => true,
