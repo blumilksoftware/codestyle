@@ -7,7 +7,6 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
-use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
@@ -113,7 +112,6 @@ class CommonRules extends Rules
         ArrayIndentationFixer::class => true,
         TrimArraySpacesFixer::class => true,
         WhitespaceAfterCommaInArrayFixer::class => true,
-        NoTrailingCommaInSinglelineArrayFixer::class => true,
         ArraySyntaxFixer::class => ["syntax" => "short"],
         PhpUnitMethodCasingFixer::class => true,
         FunctionToConstantFixer::class => true,

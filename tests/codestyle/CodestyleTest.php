@@ -68,7 +68,21 @@ class CodestyleTest extends TestCase
     /**
      * @throws Exception
      */
-    protected function runFixer(bool $fix = false): bool
+    public function testPurgeFixtures(): void
+    {
+        $fixtures = [
+            "noComments",
+        ];
+
+        foreach ($fixtures as $fixture) {
+            $this->testFixture($fixture, purge: true);
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function runFixer(bool $fix = false, bool $purge = false): bool
     {
         $dryRun = $fix ? "" : "--dry-run";
 
@@ -76,7 +90,8 @@ class CodestyleTest extends TestCase
         $application->setAutoExit(false);
 
         $output = new BufferedOutput();
-        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/config.php"), $output);
+        $configFileName = !$purge ? "config.php" : "config.purge.php";
+        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/$configFileName"), $output);
 
         return $result === 0;
     }
@@ -84,17 +99,17 @@ class CodestyleTest extends TestCase
     /**
      * @throws Exception
      */
-    protected function testFixture(string $name): void
+    protected function testFixture(string $name, bool $purge = false): void
     {
         copy(__DIR__ . "/fixtures/{$name}/actual.php", __DIR__ . "/tmp/{$name}.php");
 
         $this->assertFalse(
-            $this->runFixer(),
+            $this->runFixer(purge: $purge),
             "Fixture fixtures/{$name} returned invalid true result.",
         );
 
         $this->assertTrue(
-            $this->runFixer(fix: true),
+            $this->runFixer(fix: true, purge: $purge),
             "Fixture fixtures/{$name} was not proceeded properly.",
         );
 
