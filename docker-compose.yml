@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   php:
-    image: ghcr.io/blumilksoftware/php:8.1.0.0
+    image: ghcr.io/blumilksoftware/php:8.2
     container_name: blumilk-codestyle-php
     working_dir: /application
     user: ${CURRENT_UID:-1000}

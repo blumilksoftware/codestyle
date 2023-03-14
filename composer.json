@@ -4,9 +4,9 @@
   "license": "MIT",
   "type": "library",
   "require": {
-    "php": "^8.0",
-    "friendsofphp/php-cs-fixer": "^3.13.1",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^3.11.3"
+    "php": "^8.1",
+    "friendsofphp/php-cs-fixer": "^3.15",
+    "kubawerlos/php-cs-fixer-custom-fixers": "^3.13"
   },
   "require-dev": {
     "jetbrains/phpstorm-attributes": "^1.0",

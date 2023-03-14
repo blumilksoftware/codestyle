@@ -66,6 +66,21 @@ class CodestyleTest extends TestCase
     }
 
     /**
+     * @requires PHP >= 8.2
+     * @throws Exception
+     */
+    public function testPhp82Fixtures(): void
+    {
+        $fixtures = [
+            "php82",
+        ];
+
+        foreach ($fixtures as $fixture) {
+            $this->testFixture($fixture);
+        }
+    }
+
+    /**
      * @throws Exception
      */
     protected function runFixer(bool $fix = false): bool
