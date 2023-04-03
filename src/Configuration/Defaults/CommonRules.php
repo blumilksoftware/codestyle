@@ -7,13 +7,15 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
-use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
 use PhpCsFixer\Fixer\Basic\BracesFixer;
+use PhpCsFixer\Fixer\Basic\NoTrailingCommaInSinglelineFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
+use PhpCsFixer\Fixer\Casing\MagicMethodCasingFixer;
+use PhpCsFixer\Fixer\Casing\NativeFunctionCasingFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
@@ -25,6 +27,7 @@ use PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
+use PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer;
 use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
 use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
@@ -34,6 +37,7 @@ use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer;
+use PhpCsFixer\Fixer\FunctionNotation\LambdaNotUsedImportFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
 use PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer;
@@ -52,9 +56,12 @@ use PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\CleanNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
+use PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer;
+use PhpCsFixer\Fixer\Operator\AssignNullCoalescingToCoalesceEqualFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
 use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
+use PhpCsFixer\Fixer\Operator\NoUselessNullsafeOperatorFixer;
 use PhpCsFixer\Fixer\Operator\ObjectOperatorWithoutWhitespaceFixer;
 use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
 use PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer;
@@ -75,6 +82,9 @@ use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitSetUpTearDownVisibilityFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitTestAnnotationFixer;
+use PhpCsFixer\Fixer\ReturnNotation\NoUselessReturnFixer;
+use PhpCsFixer\Fixer\ReturnNotation\SimplifiedNullReturnFixer;
+use PhpCsFixer\Fixer\Semicolon\MultilineWhitespaceBeforeSemicolonsFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
 use PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer;
 use PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer;
@@ -84,12 +94,14 @@ use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\SimpleToComplexStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
+use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use PhpCsFixer\Fixer\Whitespace\StatementIndentationFixer;
 use PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
@@ -113,14 +125,19 @@ class CommonRules extends Rules
         ArrayIndentationFixer::class => true,
         TrimArraySpacesFixer::class => true,
         WhitespaceAfterCommaInArrayFixer::class => true,
-        NoTrailingCommaInSinglelineArrayFixer::class => true,
-        ArraySyntaxFixer::class => ["syntax" => "short"],
+        ArraySyntaxFixer::class => [
+            "syntax" => "short",
+        ],
         PhpUnitMethodCasingFixer::class => true,
         FunctionToConstantFixer::class => true,
         ExplicitIndirectVariableFixer::class => true,
-        SingleClassElementPerStatementFixer::class => ["elements" => ["const", "property"]],
+        SingleClassElementPerStatementFixer::class => [
+            "elements" => ["const", "property"],
+        ],
         NewWithBracesFixer::class => true,
-        ClassDefinitionFixer::class => ["single_line" => true],
+        ClassDefinitionFixer::class => [
+            "single_line" => true,
+        ],
         StandardizeIncrementFixer::class => true,
         SelfAccessorFixer::class => true,
         MagicConstantCasingFixer::class => true,
@@ -135,14 +152,25 @@ class CommonRules extends Rules
         PhpdocTypesFixer::class => true,
         PhpdocReturnSelfReferenceFixer::class => true,
         PhpdocVarWithoutNameFixer::class => true,
-        NoSuperfluousPhpdocTagsFixer::class => ["remove_inheritdoc" => true, "allow_mixed" => true],
+        NoSuperfluousPhpdocTagsFixer::class => [
+            "remove_inheritdoc" => true,
+            "allow_mixed" => true,
+        ],
         SingleBlankLineBeforeNamespaceFixer::class => true,
         PhpUnitTestAnnotationFixer::class => true,
         PhpUnitSetUpTearDownVisibilityFixer::class => true,
         BlankLineAfterOpeningTagFixer::class => true,
         MethodChainingIndentationFixer::class => true,
-        ConcatSpaceFixer::class => ["spacing" => "one"],
-        BinaryOperatorSpacesFixer::class => ["operators" => ["=>" => "single_space", "=" => "single_space", "&" => "no_space"]],
+        ConcatSpaceFixer::class => [
+            "spacing" => "one",
+        ],
+        BinaryOperatorSpacesFixer::class => [
+            "operators" => [
+                "=>" => "single_space",
+                "=" => "single_space",
+                "&" => "no_space",
+            ],
+        ],
         SingleTraitInsertPerStatementFixer::class => true,
         FunctionTypehintSpaceFixer::class => true,
         NoBlankLinesAfterClassOpeningFixer::class => true,
@@ -183,10 +211,19 @@ class CommonRules extends Rules
         ],
         NoExtraBlankLinesFixer::class => [
             "tokens" => [
-                "extra",
+                "attribute",
+                "break",
+                "case",
+                "continue",
                 "curly_brace_block",
+                "default",
+                "extra",
                 "parenthesis_brace_block",
+                "return",
                 "square_brace_block",
+                "switch",
+                "throw",
+                "use",
             ],
         ],
         TrailingCommaInMultilineFixer::class => [
@@ -251,5 +288,18 @@ class CommonRules extends Rules
         SingleLineCommentSpacingFixer::class => true,
         BlankLineAfterNamespaceFixer::class => true,
         SimpleToComplexStringVariableFixer::class => true,
+        NoEmptyCommentFixer::class => true,
+        NoTrailingCommaInSinglelineFixer::class => true,
+        MagicMethodCasingFixer::class => true,
+        NativeFunctionCasingFixer::class => true,
+        LambdaNotUsedImportFixer::class => true,
+        NoHomoglyphNamesFixer::class => true,
+        AssignNullCoalescingToCoalesceEqualFixer::class => true,
+        NoUselessNullsafeOperatorFixer::class => true,
+        NoUselessReturnFixer::class => true,
+        SimplifiedNullReturnFixer::class => true,
+        MultilineWhitespaceBeforeSemicolonsFixer::class => true,
+        LineEndingFixer::class => true,
+        StatementIndentationFixer::class => true,
     ];
 }

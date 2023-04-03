@@ -20,83 +20,75 @@ class CodestyleTest extends TestCase
     }
 
     /**
+     * @dataProvider providePhp80Fixtures
      * @requires PHP >= 8.0
      * @throws Exception
      */
-    public function testPhp80Fixtures(): void
+    public function testPhp80Fixtures(string $name): void
     {
-        $fixtures = [
-            "noExtraBlankLines",
-            "nullableTypeForDefaultNull",
-            "operatorSpacing",
-            "singleQuotes",
-            "strictTypes",
-            "trailingCommas",
-            "unionTypes",
-            "references",
-            "classAttributesSeparation",
-            "uselessParenthesis",
-            "laravelMigrations",
-            "phpdocs",
-            "yodaStyle",
-            "objectOperators",
-            "anonymousFunctions",
-            "namespaces",
-        ];
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture);
-        }
+        $this->testFixture($name);
     }
 
     /**
+     * @dataProvider providePhp81Fixtures
      * @requires PHP >= 8.1
      * @throws Exception
      */
-    public function testPhp81Fixtures(): void
+    public function testPhp81Fixtures(string $name): void
     {
-        $fixtures = [
-            "enums",
-            "readonlies",
-        ];
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture);
-        }
+        $this->testFixture($name);
     }
 
     /**
+     * @dataProvider providePhp82Fixtures
      * @requires PHP >= 8.2
      * @throws Exception
      */
-    public function testPhp82Fixtures(): void
+    public function testPhp82Fixtures(string $name): void
     {
-        $fixtures = [
-            "php82",
+        $this->testFixture($name);
+    }
+
+    public static function providePhp80Fixtures(): array
+    {
+        return [
+            ["noExtraBlankLines"],
+            ["nullableTypeForDefaultNull"],
+            ["operatorSpacing"],
+            ["singleQuotes"],
+            ["strictTypes"],
+            ["trailingCommas"],
+            ["unionTypes"],
+            ["references"],
+            ["classAttributesSeparation"],
+            ["uselessParenthesis"],
+            ["laravelMigrations"],
+            ["phpdocs"],
+            ["yodaStyle"],
+            ["objectOperators"],
+            ["anonymousFunctions"],
+            ["namespaces"],
+            ["emptyLines"],
         ];
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture);
-        }
     }
 
-    /**
-     * @throws Exception
-     */
-    protected function runFixer(bool $fix = false): bool
+    public static function providePhp81Fixtures(): array
     {
-        $dryRun = $fix ? "" : "--dry-run";
+        return [
+            ["enums"],
+            ["readonlies"],
+        ];
+    }
 
-        $application = new Application();
-        $application->setAutoExit(false);
-
-        $output = new BufferedOutput();
-        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/config.php"), $output);
-
-        return $result === 0;
+    public static function providePhp82Fixtures(): array
+    {
+        return [
+            ["php82"],
+        ];
     }
 
     /**
+     * @dataProvider providePhp80Fixtures
      * @throws Exception
      */
     protected function testFixture(string $name): void
@@ -118,6 +110,22 @@ class CodestyleTest extends TestCase
             __DIR__ . "/tmp/{$name}.php",
             "Result of proceeded fixture fixtures/{$name} is not equal to expected.",
         );
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function runFixer(bool $fix = false): bool
+    {
+        $dryRun = $fix ? "" : "--dry-run";
+
+        $application = new Application();
+        $application->setAutoExit(false);
+
+        $output = new BufferedOutput();
+        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/config.php"), $output);
+
+        return $result === 0;
     }
 
     protected function clearTempDirectory(): void
