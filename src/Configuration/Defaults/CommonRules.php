@@ -93,6 +93,7 @@ use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\SimpleToComplexStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
+use PhpCsFixer\Fixer\Whitespace\BlankLineBetweenImportGroupsFixer;
 use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
@@ -198,7 +199,10 @@ class CommonRules extends Rules
         VoidReturnFixer::class => true,
         UseArrowFunctionsFixer::class => true,
         FullyQualifiedStrictTypesFixer::class => true,
-        OrderedImportsFixer::class => true,
+        OrderedImportsFixer::class => [
+            "sort_algorithm" => "alpha",
+            "imports_order" => ["const", "class", "function"],
+        ],
         PhpdocLineSpanFixer::class => [
             "const" => "single",
             "property" => "single",
@@ -301,5 +305,6 @@ class CommonRules extends Rules
         MultilineWhitespaceBeforeSemicolonsFixer::class => true,
         LineEndingFixer::class => true,
         StatementIndentationFixer::class => true,
+        BlankLineBetweenImportGroupsFixer::class => true,
     ];
 }
