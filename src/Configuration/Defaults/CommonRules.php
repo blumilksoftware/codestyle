@@ -10,7 +10,6 @@ use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
-use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\Basic\NoTrailingCommaInSinglelineFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
@@ -276,7 +275,6 @@ class CommonRules extends Rules
         PhpdocNoIncorrectVarAnnotationFixer::class => true,
         PhpdocNoSuperfluousParamFixer::class => true,
         PhpdocParamOrderFixer::class => true,
-        BracesFixer::class => true,
         NoSpacesInsideParenthesisFixer::class => true,
         YodaStyleFixer::class => [
             "equal" => false,
