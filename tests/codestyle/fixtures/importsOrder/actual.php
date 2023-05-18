@@ -6,6 +6,7 @@ use function array_merge;
 use function assert;
 use Something\Api;
 use Something\Paths;
+use const Something\CONSTANT;
 use Whatever\File;
 
 use Whatever\SpecificationFile;
@@ -18,7 +19,7 @@ class Merge
         $merge = array_merge($a, $b);
 
         $reader = new Reader(new SpecificationFile(new File()), new Paths());
-        $result = $reader->merge($merge, new Api());
+        $result = $reader->merge($merge, new Api(), flag: CONSTANT);
 
         assert($result);
     }

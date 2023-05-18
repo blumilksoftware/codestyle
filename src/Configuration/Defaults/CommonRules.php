@@ -200,7 +200,7 @@ class CommonRules extends Rules
         FullyQualifiedStrictTypesFixer::class => true,
         OrderedImportsFixer::class => [
             "sort_algorithm" => "alpha",
-            "imports_order" => ["const", "class", "function"],
+            "imports_order" => ["class", "function", "const"],
         ],
         PhpdocLineSpanFixer::class => [
             "const" => "single",
