@@ -10,7 +10,6 @@ use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
-use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\Basic\NoTrailingCommaInSinglelineFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
@@ -93,6 +92,7 @@ use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\SimpleToComplexStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
+use PhpCsFixer\Fixer\Whitespace\BlankLineBetweenImportGroupsFixer;
 use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
@@ -198,7 +198,10 @@ class CommonRules extends Rules
         VoidReturnFixer::class => true,
         UseArrowFunctionsFixer::class => true,
         FullyQualifiedStrictTypesFixer::class => true,
-        OrderedImportsFixer::class => true,
+        OrderedImportsFixer::class => [
+            "sort_algorithm" => "alpha",
+            "imports_order" => ["class", "function", "const"],
+        ],
         PhpdocLineSpanFixer::class => [
             "const" => "single",
             "property" => "single",
@@ -272,7 +275,6 @@ class CommonRules extends Rules
         PhpdocNoIncorrectVarAnnotationFixer::class => true,
         PhpdocNoSuperfluousParamFixer::class => true,
         PhpdocParamOrderFixer::class => true,
-        BracesFixer::class => true,
         NoSpacesInsideParenthesisFixer::class => true,
         YodaStyleFixer::class => [
             "equal" => false,
@@ -301,5 +303,6 @@ class CommonRules extends Rules
         MultilineWhitespaceBeforeSemicolonsFixer::class => true,
         LineEndingFixer::class => true,
         StatementIndentationFixer::class => true,
+        BlankLineBetweenImportGroupsFixer::class => true,
     ];
 }

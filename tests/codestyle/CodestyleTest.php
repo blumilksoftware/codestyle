@@ -69,6 +69,7 @@ class CodestyleTest extends TestCase
             ["anonymousFunctions"],
             ["namespaces"],
             ["emptyLines"],
+            ["importsOrder"],
         ];
     }
 
