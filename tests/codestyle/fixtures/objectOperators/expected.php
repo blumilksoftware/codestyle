@@ -10,7 +10,7 @@ class ObjectOperatorTest
     public function get(): void
     {
         $array = $this->array;
-        if ($this?->nullable) {
+        if ($this->nullable) {
             unset($array);
         }
     }

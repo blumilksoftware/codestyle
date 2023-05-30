@@ -20,96 +20,89 @@ class CodestyleTest extends TestCase
     }
 
     /**
+     * @dataProvider providePhp80Fixtures
      * @requires PHP >= 8.0
      * @throws Exception
      */
-    public function testPhp80Fixtures(): void
+    public function testPhp80Fixtures(string $name): void
     {
-        $fixtures = [
-            "noExtraBlankLines",
-            "nullableTypeForDefaultNull",
-            "operatorSpacing",
-            "singleQuotes",
-            "strictTypes",
-            "trailingCommas",
-            "unionTypes",
-            "references",
-            "classAttributesSeparation",
-            "uselessParenthesis",
-            "laravelMigrations",
-            "phpdocs",
-            "yodaStyle",
-            "objectOperators",
-            "anonymousFunctions",
-            "namespaces",
-        ];
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture);
-        }
+        $this->testFixture($name);
     }
 
     /**
+     * @dataProvider providePhp81Fixtures
      * @requires PHP >= 8.1
      * @throws Exception
      */
-    public function testPhp81Fixtures(): void
+    public function testPhp81Fixtures(string $name): void
     {
-        $fixtures = [
-            "enums",
-            "readonlies",
+        $this->testFixture($name);
+    }
+
+    /**
+     * @dataProvider providePhp82Fixtures
+     * @requires PHP >= 8.2
+     * @throws Exception
+     */
+    public function testPhp82Fixtures(string $name): void
+    {
+        $this->testFixture($name);
+    }
+
+    public static function providePhp80Fixtures(): array
+    {
+        return [
+            ["noExtraBlankLines"],
+            ["nullableTypeForDefaultNull"],
+            ["operatorSpacing"],
+            ["singleQuotes"],
+            ["strictTypes"],
+            ["trailingCommas"],
+            ["unionTypes"],
+            ["references"],
+            ["classAttributesSeparation"],
+            ["uselessParenthesis"],
+            ["laravelMigrations"],
+            ["phpdocs"],
+            ["yodaStyle"],
+            ["objectOperators"],
+            ["anonymousFunctions"],
+            ["namespaces"],
+            ["emptyLines"],
+            ["importsOrder"],
         ];
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture);
-        }
     }
 
-    /**
-     * @throws Exception
-     */
-    public function testPurgeFixtures(): void
+    public static function providePhp81Fixtures(): array
     {
-        $fixtures = [
-            "noComments",
+        return [
+            ["enums"],
+            ["readonlies"],
         ];
-
-        foreach ($fixtures as $fixture) {
-            $this->testFixture($fixture, purge: true);
-        }
     }
 
-    /**
-     * @throws Exception
-     */
-    protected function runFixer(bool $fix = false, bool $purge = false): bool
+    public static function providePhp82Fixtures(): array
     {
-        $dryRun = $fix ? "" : "--dry-run";
-
-        $application = new Application();
-        $application->setAutoExit(false);
-
-        $output = new BufferedOutput();
-        $configFileName = !$purge ? "config.php" : "config.purge.php";
-        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/$configFileName"), $output);
-
-        return $result === 0;
+        return [
+            ["php82"],
+        ];
     }
 
     /**
+     * @dataProvider providePhp80Fixtures
      * @throws Exception
      */
-    protected function testFixture(string $name, bool $purge = false): void
+    protected function testFixture(string $name): void
     {
         copy(__DIR__ . "/fixtures/{$name}/actual.php", __DIR__ . "/tmp/{$name}.php");
 
         $this->assertFalse(
-            $this->runFixer(purge: $purge),
+            $this->runFixer(),
             "Fixture fixtures/{$name} returned invalid true result.",
         );
 
         $this->assertTrue(
-            $this->runFixer(fix: true, purge: $purge),
+            $this->runFixer(fix: true),
             "Fixture fixtures/{$name} was not proceeded properly.",
         );
 
@@ -118,6 +111,22 @@ class CodestyleTest extends TestCase
             __DIR__ . "/tmp/{$name}.php",
             "Result of proceeded fixture fixtures/{$name} is not equal to expected.",
         );
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function runFixer(bool $fix = false): bool
+    {
+        $dryRun = $fix ? "" : "--dry-run";
+
+        $application = new Application();
+        $application->setAutoExit(false);
+
+        $output = new BufferedOutput();
+        $result = $application->run(new StringInput("fix {$dryRun} --diff --config ./tests/codestyle/config.php"), $output);
+
+        return $result === 0;
     }
 
     protected function clearTempDirectory(): void
