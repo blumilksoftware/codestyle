@@ -8,7 +8,9 @@ use Blumilk\Codestyle\Configuration\Defaults\CommonRules;
 use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\Rules;
+use Blumilk\Codestyle\Configuration\Utils\Rule;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NoCommentFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use JetBrains\PhpStorm\ArrayShape;
 use PhpCsFixer\Config as PhpCsFixerConfig;
@@ -42,8 +44,8 @@ class Config
         }
 
         $finder = Finder::create()->directories()->append($files);
-
         $config = new PhpCsFixerConfig("Blumilk codestyle standard");
+
         return $config->setFinder($finder)
             ->setUsingCache(false)
             ->registerCustomFixers(new PhpCsFixerCustomFixers())
@@ -59,6 +61,13 @@ class Config
             "paths" => $this->paths->get(),
             "rules" => $this->rules->get(),
         ];
+    }
+
+    public function purgeMode(): static
+    {
+        $this->rules->add(new Rule(NoCommentFixer::class));
+
+        return $this;
     }
 
     protected function getAllFiles(array &$paths, string $path): void
@@ -83,6 +92,7 @@ class Config
         return [
             new DoubleQuoteFixer(),
             new NoLaravelMigrationsGeneratedCommentFixer(),
+            new NoCommentFixer(),
         ];
     }
 }

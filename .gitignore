@@ -1,5 +1,6 @@
 /.composer
 /.idea
+/playground
 /vendor
 
 composer.lock
