@@ -67,6 +67,7 @@ EOF;
     public function getPriority(): int
     {
         $fixer = new VoidReturnFixer();
+
         return $fixer->getPriority() + 1;
     }
 

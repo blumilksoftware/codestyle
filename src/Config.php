@@ -76,6 +76,7 @@ class Config
             if (str_ends_with($path, ".php")) {
                 $paths[] = $path;
             }
+
             return;
         }
 
