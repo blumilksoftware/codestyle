@@ -38,6 +38,7 @@ class Config
         list("paths" => $paths, "rules" => $rules) = $this->options();
 
         $files = [];
+
         foreach ($paths as $path) {
             $directory = $this->rootPath . "/" . $path;
             $this->getAllFiles($files, $directory);

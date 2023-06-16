@@ -69,6 +69,7 @@ EOF;
 
             $content = $token->getContent();
             $prefix = "";
+
             if (
                 $content[0] === "'" &&
                 !str_contains($content, '"') &&

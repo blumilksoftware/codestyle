@@ -1,11 +1,26 @@
 <?php
-
 declare(strict_types=1);
 
 class BlankLine
 {
-    public function getFoo(int $foo): int {
+    /**
+     * @throws Exception
+     */
+    public function getFoo(int $foo): int
+    {
         $bar = $foo;
+        try {
+
+            while ($bar > 0) {
+                $bar++;
+            }
+            for ($i = 0; $i < 5; $i++) {
+                echo $i;
+            }
+        } catch (Exception $exception) {
+            $value = "error";
+            throw new Exception(message: $value);
+        }
         return $bar;
     }
 }

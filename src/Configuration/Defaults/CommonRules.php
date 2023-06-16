@@ -305,6 +305,19 @@ class CommonRules extends Rules
         LineEndingFixer::class => true,
         StatementIndentationFixer::class => true,
         BlankLineBetweenImportGroupsFixer::class => true,
-        BlankLineBeforeStatementFixer::class => true,
+        BlankLineBeforeStatementFixer::class => [
+            "statements" => [
+                "break",
+                "continue",
+                "declare",
+                "return",
+                "throw",
+                "try",
+                "if",
+                "do",
+                "for",
+                "foreach",
+                "while",
+            ]],
     ];
 }
