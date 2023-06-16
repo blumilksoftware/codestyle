@@ -27,4 +27,11 @@ class BlankLine
 
         return $bar;
     }
+
+    protected function getBar(int $number): void
+    {
+        if ($number === 1) {
+            return;
+        }
+    }
 }
