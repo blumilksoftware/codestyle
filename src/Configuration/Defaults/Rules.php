@@ -15,6 +15,7 @@ abstract class Rules implements RulesContract
     public function get(): array
     {
         $rules = [];
+
         foreach ($this->rules as $fixer => $options) {
             /** @var AbstractFixer $fixer */
             $fixer = new $fixer();

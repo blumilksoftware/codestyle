@@ -92,6 +92,7 @@ use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\SimpleToComplexStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
+use PhpCsFixer\Fixer\Whitespace\BlankLineBeforeStatementFixer;
 use PhpCsFixer\Fixer\Whitespace\BlankLineBetweenImportGroupsFixer;
 use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
@@ -304,5 +305,19 @@ class CommonRules extends Rules
         LineEndingFixer::class => true,
         StatementIndentationFixer::class => true,
         BlankLineBetweenImportGroupsFixer::class => true,
+        BlankLineBeforeStatementFixer::class => [
+            "statements" => [
+                "break",
+                "continue",
+                "declare",
+                "return",
+                "throw",
+                "try",
+                "if",
+                "do",
+                "for",
+                "foreach",
+                "while",
+            ]],
     ];
 }

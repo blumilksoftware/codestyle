@@ -56,6 +56,7 @@ class CommonRulesetTest extends CodestyleTestCase
             ["namespaces"],
             ["emptyLines"],
             ["importsOrder"],
+            ["blankLineBeforeStatement"],
         ];
     }
 

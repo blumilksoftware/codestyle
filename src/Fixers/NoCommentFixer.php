@@ -49,6 +49,7 @@ EOF;
     public function getPriority(): int
     {
         $fixer = new NoExtraBlankLinesFixer();
+
         return $fixer->getPriority() + 1;
     }
 
