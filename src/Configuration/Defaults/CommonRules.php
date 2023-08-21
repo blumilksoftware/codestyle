@@ -326,7 +326,7 @@ class CommonRules extends Rules
         ControlStructureBracesFixer::class => true,
         ControlStructureContinuationPositionFixer::class => true,
         CurlyBracesPositionFixer::class => [
-            "anonymous_functions_opening_brace" => "same_line"
+            "anonymous_functions_opening_brace" => "same_line",
         ],
     ];
 }
