@@ -11,8 +11,7 @@ $config = new Config(
         "bin",
         "src",
         "tests/unit",
-        "tests/codestyle/CodestyleTest.php",
-        "tests/codestyle/config.php",
+        "tests/codestyle",
     ),
 );
 

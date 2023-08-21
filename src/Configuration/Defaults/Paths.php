@@ -23,7 +23,7 @@ class Paths implements PathsContract
     public function add(string ...$paths): static
     {
         foreach ($paths as $path) {
-            if (!in_array($path, $this->paths, true)) {
+            if (!in_array($path, $this->paths, strict: true)) {
                 $this->paths[] = $path;
             }
         }
@@ -41,7 +41,7 @@ class Paths implements PathsContract
     public function filter(string ...$paths): static
     {
         foreach ($this->paths as $index => $path) {
-            if (in_array($path, $paths, true)) {
+            if (in_array($path, $paths, strict: true)) {
                 unset($this->paths[$index]);
             }
         }

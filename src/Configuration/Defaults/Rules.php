@@ -28,7 +28,7 @@ abstract class Rules implements RulesContract
     public function add(Rule ...$rules): static
     {
         foreach ($rules as $rule) {
-            if (!in_array($rule->getFixerClassName(), array_keys($this->rules), true)) {
+            if (!in_array($rule->getFixerClassName(), array_keys($this->rules), strict: true)) {
                 $this->rules[$rule->getFixerClassName()] = $rule->getOptions();
             }
         }
@@ -46,7 +46,7 @@ abstract class Rules implements RulesContract
     public function filter(string ...$rules): static
     {
         foreach (array_keys($this->rules) as $rule) {
-            if (in_array($rule, $rules, true)) {
+            if (in_array($rule, $rules, strict: true)) {
                 unset($this->rules[$rule]);
             }
         }

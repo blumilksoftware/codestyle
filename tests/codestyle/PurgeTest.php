@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Tests;
+
+use Exception;
+
 class PurgeTest extends CodestyleTestCase
 {
     /**
