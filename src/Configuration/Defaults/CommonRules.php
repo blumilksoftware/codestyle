@@ -10,7 +10,10 @@ use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
+use PhpCsFixer\Fixer\Basic\CurlyBracesPositionFixer;
+use PhpCsFixer\Fixer\Basic\NoMultipleStatementsPerLineFixer;
 use PhpCsFixer\Fixer\Basic\NoTrailingCommaInSinglelineFixer;
+use PhpCsFixer\Fixer\Basic\PsrAutoloadingFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\Casing\MagicMethodCasingFixer;
@@ -29,13 +32,14 @@ use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer;
 use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
 use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
-use PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\LambdaNotUsedImportFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
@@ -52,9 +56,9 @@ use PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer;
+use PhpCsFixer\Fixer\NamespaceNotation\BlankLinesBeforeNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\CleanNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer;
-use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
 use PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer;
 use PhpCsFixer\Fixer\Operator\AssignNullCoalescingToCoalesceEqualFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
@@ -99,10 +103,10 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
-use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
 use PhpCsFixer\Fixer\Whitespace\StatementIndentationFixer;
+use PhpCsFixer\Fixer\Whitespace\TypeDeclarationSpacesFixer;
 use PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
 use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
@@ -113,7 +117,6 @@ use PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocNoSuperfluousParamFixer;
-use PhpCsFixerCustomFixers\Fixer\PhpdocParamOrderFixer;
 use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
@@ -157,7 +160,6 @@ class CommonRules extends Rules
             "remove_inheritdoc" => true,
             "allow_mixed" => true,
         ],
-        SingleBlankLineBeforeNamespaceFixer::class => true,
         PhpUnitTestAnnotationFixer::class => true,
         PhpUnitSetUpTearDownVisibilityFixer::class => true,
         BlankLineAfterOpeningTagFixer::class => true,
@@ -173,7 +175,6 @@ class CommonRules extends Rules
             ],
         ],
         SingleTraitInsertPerStatementFixer::class => true,
-        FunctionTypehintSpaceFixer::class => true,
         NoBlankLinesAfterClassOpeningFixer::class => true,
         NoSinglelineWhitespaceBeforeSemicolonsFixer::class => true,
         PhpdocSingleLineVarSpacingFixer::class => true,
@@ -275,8 +276,6 @@ class CommonRules extends Rules
         NoPhpStormGeneratedCommentFixer::class => true,
         PhpdocNoIncorrectVarAnnotationFixer::class => true,
         PhpdocNoSuperfluousParamFixer::class => true,
-        PhpdocParamOrderFixer::class => true,
-        NoSpacesInsideParenthesisFixer::class => true,
         YodaStyleFixer::class => [
             "equal" => false,
             "identical" => false,
@@ -318,6 +317,16 @@ class CommonRules extends Rules
                 "for",
                 "foreach",
                 "while",
-            ]],
+            ],
+        ],
+        NoMultipleStatementsPerLineFixer::class => true,
+        BlankLinesBeforeNamespaceFixer::class => true,
+        PsrAutoloadingFixer::class => true,
+        TypeDeclarationSpacesFixer::class => true,
+        ControlStructureBracesFixer::class => true,
+        ControlStructureContinuationPositionFixer::class => true,
+        CurlyBracesPositionFixer::class => [
+            "anonymous_functions_opening_brace" => "same_line",
+        ],
     ];
 }

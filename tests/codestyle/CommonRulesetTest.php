@@ -1,7 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Blumilk\Codestyle\Tests;
+
+use Exception;
 
 class CommonRulesetTest extends CodestyleTestCase
 {
@@ -57,6 +60,8 @@ class CommonRulesetTest extends CodestyleTestCase
             ["emptyLines"],
             ["importsOrder"],
             ["blankLineBeforeStatement"],
+            ["braces"],
+            ["stringVariables"],
         ];
     }
 
