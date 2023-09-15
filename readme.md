@@ -124,9 +124,16 @@ There are scripts available for package codestyle checking and testing:
 
 There is also the Docker Compose configuration available:
 ```shell
-docker-compose up -d
-docker-compose exec php php -v
-docker-compose exec php composer -V
+docker compose up -d
+docker compose exec php php -v
+docker compose exec php composer -V
+```
+
+There are also Makefile commands available:
+```shell
+make run
+make shell
+make stop
 ```
 
 Please maintain our project guidelines:
