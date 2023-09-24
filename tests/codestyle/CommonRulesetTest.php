@@ -62,6 +62,7 @@ class CommonRulesetTest extends CodestyleTestCase
             ["blankLineBeforeStatement"],
             ["braces"],
             ["stringVariables"],
+            ["lowercaseKeywords"],
         ];
     }
 

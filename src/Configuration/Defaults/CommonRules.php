@@ -14,6 +14,7 @@ use PhpCsFixer\Fixer\Basic\CurlyBracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\NoMultipleStatementsPerLineFixer;
 use PhpCsFixer\Fixer\Basic\NoTrailingCommaInSinglelineFixer;
 use PhpCsFixer\Fixer\Basic\PsrAutoloadingFixer;
+use PhpCsFixer\Fixer\Casing\LowercaseKeywordsFixer;
 use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\Casing\MagicMethodCasingFixer;
@@ -328,5 +329,6 @@ class CommonRules extends Rules
         CurlyBracesPositionFixer::class => [
             "anonymous_functions_opening_brace" => "same_line",
         ],
+        LowercaseKeywordsFixer::class => true,
     ];
 }
