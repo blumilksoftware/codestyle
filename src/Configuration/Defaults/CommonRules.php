@@ -7,6 +7,7 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
+use PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
@@ -330,5 +331,6 @@ class CommonRules extends Rules
             "anonymous_functions_opening_brace" => "same_line",
         ],
         LowercaseKeywordsFixer::class => true,
+        NoMultilineWhitespaceAroundDoubleArrowFixer::class => true,
     ];
 }
