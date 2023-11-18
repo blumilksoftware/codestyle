@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
-use Blumilk\Codestyle\Fixers\CompactEmptyArray;
+use Blumilk\Codestyle\Fixers\CompactEmptyArrayFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
@@ -333,6 +333,6 @@ class CommonRules extends Rules
         ],
         LowercaseKeywordsFixer::class => true,
         NoMultilineWhitespaceAroundDoubleArrowFixer::class => true,
-        CompactEmptyArray::class => true,
+        CompactEmptyArrayFixer::class => true,
     ];
 }

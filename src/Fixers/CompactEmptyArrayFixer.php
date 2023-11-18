@@ -12,7 +12,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
-final class CompactEmptyArray implements FixerInterface
+final class CompactEmptyArrayFixer implements FixerInterface
 {
     public function getDefinition(): FixerDefinitionInterface
     {
