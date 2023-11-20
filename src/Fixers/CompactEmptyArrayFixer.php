@@ -10,6 +10,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
+use PhpCsFixerCustomFixers\Fixer\NoCommentedOutCodeFixer;
 use SplFileInfo;
 
 final class CompactEmptyArrayFixer implements FixerInterface
@@ -74,7 +75,9 @@ final class CompactEmptyArrayFixer implements FixerInterface
 
     public function getPriority(): int
     {
-        return 0;
+        $fixer = new NoCommentedOutCodeFixer();
+
+        return $fixer->getPriority() - 1;
     }
 
     public function supports(SplFileInfo $file): bool
