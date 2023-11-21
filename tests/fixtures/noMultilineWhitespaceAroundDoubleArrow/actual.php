@@ -1,6 +1,6 @@
 <?php
 
-class NoMultilineWhitespaceAroundDoubleArrow
+class EmptyArray
 {
     public function getArray1(): array
     {

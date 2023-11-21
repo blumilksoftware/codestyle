@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class NoMultilineWhitespaceAroundDoubleArrow
+class EmptyArray
 {
     public function getArray1(): array
     {

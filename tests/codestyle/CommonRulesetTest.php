@@ -63,6 +63,8 @@ class CommonRulesetTest extends CodestyleTestCase
             ["braces"],
             ["stringVariables"],
             ["lowercaseKeywords"],
+            ["noMultilineWhitespaceAroundDoubleArrow"],
+            ["compactArray"],
         ];
     }
 
