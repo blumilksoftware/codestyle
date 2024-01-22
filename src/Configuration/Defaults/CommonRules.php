@@ -12,7 +12,7 @@ use PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
-use PhpCsFixer\Fixer\Basic\CurlyBracesPositionFixer;
+use PhpCsFixer\Fixer\Basic\BracesPositionFixer;
 use PhpCsFixer\Fixer\Basic\NoMultipleStatementsPerLineFixer;
 use PhpCsFixer\Fixer\Basic\NoTrailingCommaInSinglelineFixer;
 use PhpCsFixer\Fixer\Basic\PsrAutoloadingFixer;
@@ -37,8 +37,8 @@ use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
 use PhpCsFixer\Fixer\Comment\SingleLineCommentSpacingFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
+use PhpCsFixer\Fixer\ControlStructure\NoUnneededBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
-use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer;
 use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
@@ -54,6 +54,7 @@ use PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\Import\SingleLineAfterImportsFixer;
+use PhpCsFixer\Fixer\LanguageConstruct\ClassKeywordFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer;
@@ -66,7 +67,7 @@ use PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer;
 use PhpCsFixer\Fixer\Operator\AssignNullCoalescingToCoalesceEqualFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
-use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
+use PhpCsFixer\Fixer\Operator\NewWithParenthesesFixer;
 use PhpCsFixer\Fixer\Operator\NoUselessNullsafeOperatorFixer;
 use PhpCsFixer\Fixer\Operator\ObjectOperatorWithoutWhitespaceFixer;
 use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
@@ -101,7 +102,7 @@ use PhpCsFixer\Fixer\StringNotation\SimpleToComplexStringVariableFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\BlankLineBeforeStatementFixer;
 use PhpCsFixer\Fixer\Whitespace\BlankLineBetweenImportGroupsFixer;
-use PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer;
+use PhpCsFixer\Fixer\Whitespace\CompactNullableTypeDeclarationFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
@@ -141,7 +142,7 @@ class CommonRules extends Rules
         SingleClassElementPerStatementFixer::class => [
             "elements" => ["const", "property"],
         ],
-        NewWithBracesFixer::class => true,
+        NewWithParenthesesFixer::class => true,
         ClassDefinitionFixer::class => [
             "single_line" => true,
         ],
@@ -194,7 +195,7 @@ class CommonRules extends Rules
         NoUnusedImportsFixer::class => true,
         NoEmptyStatementFixer::class => true,
         NoUnneededControlParenthesesFixer::class => true,
-        NoUnneededCurlyBracesFixer::class => true,
+        NoUnneededBracesFixer::class => true,
         DeclareStrictTypesFixer::class => true,
         CastSpacesFixer::class => [
             "space" => "none",
@@ -202,7 +203,9 @@ class CommonRules extends Rules
         DoubleQuoteFixer::class => true,
         VoidReturnFixer::class => true,
         UseArrowFunctionsFixer::class => true,
-        FullyQualifiedStrictTypesFixer::class => true,
+        FullyQualifiedStrictTypesFixer::class => [
+            "import_symbols" => true,
+        ],
         OrderedImportsFixer::class => [
             "sort_algorithm" => "alpha",
             "imports_order" => ["class", "function", "const"],
@@ -255,7 +258,7 @@ class CommonRules extends Rules
         NoLeadingImportSlashFixer::class => true,
         LowercaseCastFixer::class => true,
         LowercaseStaticReferenceFixer::class => true,
-        CompactNullableTypehintFixer::class => true,
+        CompactNullableTypeDeclarationFixer::class => true,
         DeclareEqualNormalizeFixer::class => true,
         ShortScalarCastFixer::class => true,
         CleanNamespaceFixer::class => true,
@@ -328,11 +331,12 @@ class CommonRules extends Rules
         TypeDeclarationSpacesFixer::class => true,
         ControlStructureBracesFixer::class => true,
         ControlStructureContinuationPositionFixer::class => true,
-        CurlyBracesPositionFixer::class => [
+        BracesPositionFixer::class => [
             "anonymous_functions_opening_brace" => "same_line",
         ],
         LowercaseKeywordsFixer::class => true,
         NoMultilineWhitespaceAroundDoubleArrowFixer::class => true,
         CompactEmptyArrayFixer::class => true,
+        ClassKeywordFixer::class => true,
     ];
 }

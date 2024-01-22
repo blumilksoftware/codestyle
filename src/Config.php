@@ -23,6 +23,10 @@ class Config
     protected Paths $paths;
     protected Rules $rules;
     protected string $rootPath;
+    /**
+     * @var true
+     */
+    protected bool $withoutRiskyFixers = false;
 
     public function __construct(
         ?Paths $paths = null,
@@ -52,7 +56,7 @@ class Config
             ->setUsingCache(false)
             ->registerCustomFixers(new PhpCsFixerCustomFixers())
             ->registerCustomFixers($this->getCustomFixers())
-            ->setRiskyAllowed(true)
+            ->setRiskyAllowed($this->withoutRiskyFixers)
             ->setRules($rules);
     }
 
@@ -68,6 +72,13 @@ class Config
     public function purgeMode(): static
     {
         $this->rules->add(new Rule(NoCommentFixer::class));
+
+        return $this;
+    }
+
+    public function withoutRiskyFixers(): static
+    {
+        $this->withoutRiskyFixers = true;
 
         return $this;
     }
