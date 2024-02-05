@@ -5,8 +5,8 @@
   "type": "library",
   "require": {
     "php": "^8.1",
-    "friendsofphp/php-cs-fixer": "^3.48",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^3.19"
+    "friendsofphp/php-cs-fixer": "^3.49",
+    "kubawerlos/php-cs-fixer-custom-fixers": "^3.20"
   },
   "require-dev": {
     "jetbrains/phpstorm-attributes": "^1.0",

@@ -23,10 +23,7 @@ class Config
     protected Paths $paths;
     protected Rules $rules;
     protected string $rootPath;
-    /**
-     * @var true
-     */
-    protected bool $withoutRiskyFixers = false;
+    protected bool $withRiskyFixers = true;
 
     public function __construct(
         ?Paths $paths = null,
@@ -56,7 +53,7 @@ class Config
             ->setUsingCache(false)
             ->registerCustomFixers(new PhpCsFixerCustomFixers())
             ->registerCustomFixers($this->getCustomFixers())
-            ->setRiskyAllowed($this->withoutRiskyFixers)
+            ->setRiskyAllowed($this->withRiskyFixers)
             ->setRules($rules);
     }
 
@@ -78,7 +75,7 @@ class Config
 
     public function withoutRiskyFixers(): static
     {
-        $this->withoutRiskyFixers = true;
+        $this->withRiskyFixers = false;
 
         return $this;
     }
