@@ -7,8 +7,9 @@ use Illuminate\Support\Str;
 
 
 /**
-| This is configuration file for Laravel application.
-*/
+ * This is configuration file for Laravel application.
+ * @see https://laravel.com/docs/11.x/database
+ */
 return [
     /*
     |--------------------------------------------------------------------------
