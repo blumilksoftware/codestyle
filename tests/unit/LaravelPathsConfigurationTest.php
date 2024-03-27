@@ -14,12 +14,12 @@ class LaravelPathsConfigurationTest extends TestCase
         $config = new Config(paths: $paths);
 
         $this->assertSame(
-            ["app", "bootstrap/app.php", "config", "database", "lang", "public/index.php", "routes", "tests"],
+            ["app", "bootstrap/app.php", "bootstrap/providers.php", "config", "database", "lang", "public/index.php", "routes", "tests"],
             $config->options()["paths"],
         );
     }
 
-    public function testPreviousLaravelVersionPathsConfiguration(): void
+    public function testLaravel8PathsConfiguration(): void
     {
         $paths = new LaravelPaths(LaravelPaths::LARAVEL_8_PATHS);
         $config = new Config(paths: $paths);
@@ -30,13 +30,24 @@ class LaravelPathsConfigurationTest extends TestCase
         );
     }
 
+    public function testLaravel9And10PathsConfiguration(): void
+    {
+        $paths = new LaravelPaths(LaravelPaths::LARAVEL_10_PATHS);
+        $config = new Config(paths: $paths);
+
+        $this->assertSame(
+            ["app", "bootstrap/app.php", "config", "database", "lang", "public/index.php", "routes", "tests"],
+            $config->options()["paths"],
+        );
+    }
+
     public function testFilteredLaravelPathsConfiguration(): void
     {
         $paths = new LaravelPaths();
         $config = new Config(paths: $paths->filter("lang"));
 
         $this->assertSame(
-            ["app", "bootstrap/app.php", "config", "database", "public/index.php", "routes", "tests"],
+            ["app", "bootstrap/app.php", "bootstrap/providers.php", "config", "database", "public/index.php", "routes", "tests"],
             $config->options()["paths"],
         );
     }
