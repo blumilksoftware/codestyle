@@ -7,14 +7,14 @@ namespace Blumilk\Codestyle\Fixers;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixerCustomFixers\TokenRemover;
 use SplFileInfo;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 final class NoCommentFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
