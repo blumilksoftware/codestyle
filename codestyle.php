@@ -15,4 +15,4 @@ $config = new Config(
     ),
 );
 
-return $config->config();
+return $config->ignoreMarkedFiles()->config();

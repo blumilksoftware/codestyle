@@ -20,10 +20,12 @@ use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 
 class Config
 {
+    protected const IGNORE_TAG = "php-cs-fixer:ignore-file";
     protected Paths $paths;
     protected Rules $rules;
     protected string $rootPath;
     protected bool $withRiskyFixers = true;
+    protected bool $ignoreMarkedFiles = false;
 
     public function __construct(
         ?Paths $paths = null,
@@ -46,7 +48,11 @@ class Config
             $this->getAllFiles($files, $directory);
         }
 
-        $finder = Finder::create()->directories()->append($files);
+        $filteredFiles = $this->ignoreMarkedFiles
+            ? array_filter($files, fn(string $file): bool => !str_contains(file_get_contents($file), self::IGNORE_TAG))
+            : $files;
+
+        $finder = Finder::create()->directories()->append($filteredFiles);
         $config = new PhpCsFixerConfig("Blumilk codestyle standard");
 
         return $config->setFinder($finder)
@@ -76,6 +82,13 @@ class Config
     public function withoutRiskyFixers(): static
     {
         $this->withRiskyFixers = false;
+
+        return $this;
+    }
+
+    public function ignoreMarkedFiles(): static
+    {
+        $this->ignoreMarkedFiles = true;
 
         return $this;
     }
