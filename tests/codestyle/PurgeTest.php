@@ -8,16 +8,27 @@ use Exception;
 
 class PurgeTest extends CodestyleTestCase
 {
+    private string $config;
     /**
      * @throws Exception
      */
-    public function testPhp82Fixtures(): void
+    public function testPhp82PurgeMode(): void
     {
+        $this->config = "./tests/codestyle/config/config.purge.php";
         $this->testFixture("noComments");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testPhp82PurgeWithoutDocCommentsTest(): void
+    {
+        $this->config = "./tests/codestyle/config/config.purge.without.doc.comments.php";
+        $this->testFixture("noCommentsWithoutDocComments");
     }
 
     protected function getConfigPath(): string
     {
-        return "./tests/codestyle/config/config.purge.php";
+        return $this->config;
     }
 }
