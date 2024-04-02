@@ -9,6 +9,7 @@ use Exception;
 class PurgeTest extends CodestyleTestCase
 {
     private string $config;
+
     /**
      * @throws Exception
      */
