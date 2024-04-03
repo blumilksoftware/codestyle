@@ -66,9 +66,9 @@ class Config
         ];
     }
 
-    public function purgeMode(): static
+    public function purgeMode(bool $purgeDocComments = true): static
     {
-        $this->rules->add(new Rule(NoCommentFixer::class));
+        $this->rules->add(new Rule(NoCommentFixer::class, ["doc_comment" => $purgeDocComments]));
 
         return $this;
     }
