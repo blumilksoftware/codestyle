@@ -111,7 +111,7 @@ If you want to enable ignoring marked file, you can add `ignoreMarkedFiles` meth
 ```php
 return $config->ignoreMarkedFiles()->config();
 ```
-and then add `// php-cs-fixer-ignore-file` to the file which you want to ignore.
+and then add `// php-cs-fixer:ignore-file` to the file which you want to ignore.
 
 #### Upgrading guide
 Upgrading guide is available in [upgrading.md](./upgrading.md) file.
