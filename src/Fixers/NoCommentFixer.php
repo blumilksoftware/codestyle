@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Fixers;
 
-use PhpCsFixer\Fixer\FixerInterface;
+use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -13,8 +16,18 @@ use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixerCustomFixers\TokenRemover;
 use SplFileInfo;
 
-final class NoCommentFixer implements FixerInterface
+final class NoCommentFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
+    public function getConfigurationDefinition(): FixerConfigurationResolver
+    {
+        return new FixerConfigurationResolver([
+            (new FixerOptionBuilder("doc_comment", "Docblock comments should be removed."))
+                ->setAllowedTypes(["bool"])
+                ->setDefault(false)
+                ->getOption(),
+        ]);
+    }
+
     public function getDefinition(): FixerDefinitionInterface
     {
         $codeSample = <<<'EOF'
@@ -68,10 +81,10 @@ EOF;
         return true;
     }
 
-    public function fix(SplFileInfo $file, Tokens $tokens): void
+    public function applyFix(SplFileInfo $file, Tokens $tokens): void
     {
         for ($index = $tokens->count() - 1; $index > 0; $index--) {
-            if (!$tokens[$index]->isGivenKind([T_COMMENT])) {
+            if (!$tokens[$index]->isGivenKind($this->configuration["doc_comment"] ? [T_COMMENT, T_DOC_COMMENT] : [T_COMMENT])) {
                 continue;
             }
 
