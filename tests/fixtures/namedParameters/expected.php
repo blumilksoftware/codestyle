@@ -7,3 +7,5 @@ $class = new ErrorsThresholdExceeded(
     errorsNumber: $errors,
     percentage: $percentage,
 );
+
+$result = $reader->merge($merge, new Api(), flag: CONSTANT);

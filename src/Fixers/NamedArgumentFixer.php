@@ -8,6 +8,7 @@ use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\CT;
+use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 
@@ -43,7 +44,7 @@ EOF;
 
     public function getPriority(): int
     {
-        return 1;
+        return 0;
     }
 
     public function supports(SplFileInfo $file): bool
@@ -64,18 +65,26 @@ EOF;
     public function fix(SplFileInfo $file, Tokens $tokens): void
     {
         foreach ($tokens as $index => $token) {
-            if (!$token->isGivenKind(CT::T_NAMED_ARGUMENT_NAME)) {
+            if (!$token->isGivenKind([CT::T_NAMED_ARGUMENT_NAME, CT::T_NAMED_ARGUMENT_COLON])) {
                 continue;
             }
 
-            $colonIndex = $tokens->getNextMeaningfulToken($index);
+            if ($token->isGivenKind(CT::T_NAMED_ARGUMENT_NAME)) {
+                $colonIndex = $tokens->getNextMeaningfulToken($index);
 
-            if ($colonIndex !== null && $tokens[$colonIndex]->isGivenKind(CT::T_NAMED_ARGUMENT_COLON)) {
-                $nextIndex = $tokens->getNextNonWhitespace($index);
+                if ($colonIndex !== null && $tokens[$colonIndex]->isGivenKind(CT::T_NAMED_ARGUMENT_COLON)) {
+                    $nextIndex = $tokens->getNextNonWhitespace($index);
 
-                if ($nextIndex !== null && $nextIndex === $colonIndex) {
-                    $tokens->clearAt($index + 1);
-                    $tokens->clearEmptyTokens();
+                    if ($tokens[$index + 1]->isGivenKind(T_WHITESPACE) && $nextIndex === $colonIndex) {
+                        $tokens->clearAt($index + 1);
+                        $tokens->clearEmptyTokens();
+                    }
+                }
+            } elseif($token->isGivenKind(CT::T_NAMED_ARGUMENT_COLON)) {
+                if ($tokens[$index + 1]->isWhitespace() && $tokens[$index + 1]->getContent() !== " ") {
+                    $tokens[$index + 1] = new Token([T_WHITESPACE, ' ']);
+                } elseif (!$tokens[$index + 1]->isWhitespace()) {
+                    $tokens->insertAt($index + 1, new Token([T_WHITESPACE, ' ']));
                 }
             }
         }
