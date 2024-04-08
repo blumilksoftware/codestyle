@@ -80,11 +80,11 @@ EOF;
                         $tokens->clearEmptyTokens();
                     }
                 }
-            } elseif($token->isGivenKind(CT::T_NAMED_ARGUMENT_COLON)) {
+            } elseif ($token->isGivenKind(CT::T_NAMED_ARGUMENT_COLON)) {
                 if ($tokens[$index + 1]->isWhitespace() && $tokens[$index + 1]->getContent() !== " ") {
-                    $tokens[$index + 1] = new Token([T_WHITESPACE, ' ']);
+                    $tokens[$index + 1] = new Token([T_WHITESPACE, " "]);
                 } elseif (!$tokens[$index + 1]->isWhitespace()) {
-                    $tokens->insertAt($index + 1, new Token([T_WHITESPACE, ' ']));
+                    $tokens->insertAt($index + 1, new Token([T_WHITESPACE, " "]));
                 }
             }
         }
