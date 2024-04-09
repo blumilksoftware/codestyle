@@ -11,6 +11,7 @@ use Blumilk\Codestyle\Configuration\Rules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
 use Blumilk\Codestyle\Fixers\CompactEmptyArrayFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NamedArgumentFixer;
 use Blumilk\Codestyle\Fixers\NoCommentFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use JetBrains\PhpStorm\ArrayShape;
@@ -73,9 +74,9 @@ class Config
         ];
     }
 
-    public function purgeMode(): static
+    public function purgeMode(bool $purgeDocComments = true): static
     {
-        $this->rules->add(new Rule(NoCommentFixer::class));
+        $this->rules->add(new Rule(NoCommentFixer::class, ["doc_comment" => $purgeDocComments]));
 
         return $this;
     }
@@ -119,6 +120,7 @@ class Config
             new NoLaravelMigrationsGeneratedCommentFixer(),
             new NoCommentFixer(),
             new CompactEmptyArrayFixer(),
+            new NamedArgumentFixer(),
         ];
     }
 }
