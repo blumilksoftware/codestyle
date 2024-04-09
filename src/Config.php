@@ -21,6 +21,7 @@ use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 class Config
 {
     protected const IGNORE_TAG = "php-cs-fixer:ignore-file";
+
     protected Paths $paths;
     protected Rules $rules;
     protected string $rootPath;
