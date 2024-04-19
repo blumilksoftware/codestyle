@@ -1,3 +1,10 @@
+### Upgrading guide from 2.x to 3.x
+The checklist for updating old projects is as follows:
+
+- [ ] update the main dependency `blumilksoftware/codestyle` to version `^3.0` in `composer.json` file
+- [ ] run `composer update blumilksoftware/codestyle`
+- [ ] update `codestyle.php` file configuration paths if you are still using Laravel 10 because the default Laravel paths have changed to Laravel 11
+
 ### Upgrading guide from 1.x to 2.x
 The checklist for updating old projects is as follows:
 
