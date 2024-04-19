@@ -101,6 +101,18 @@ or following to fix found errors:
 composer csf
 ```
 
+#### Additional configuration
+If you want to disable risky rules, you can add `withoutRiskyFixers` method to the config file:
+```php
+return $config->withoutRiskyFixers()->config();
+```
+
+If you want to enable ignoring marked file, you can add `ignoreMarkedFiles` method to the config file:
+```php
+return $config->ignoreMarkedFiles()->config();
+```
+and then add `// php-cs-fixer:ignore-file` to the file which you want to ignore.
+
 #### Upgrading guide
 Upgrading guide is available in [upgrading.md](./upgrading.md) file.
 
