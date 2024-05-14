@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * @property string $id
+ */
+
+class Test
+{
+}
+
 return [
     "default" => env("DB_CONNECTION", "mysql"),
 
