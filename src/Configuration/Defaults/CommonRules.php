@@ -75,6 +75,7 @@ use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
 use PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer;
+use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer;
@@ -340,5 +341,6 @@ class CommonRules extends Rules
         CompactEmptyArrayFixer::class => true,
         ClassKeywordFixer::class => true,
         NamedArgumentFixer::class => true,
+        NoBlankLinesAfterPhpdocFixer::class => true,
     ];
 }
