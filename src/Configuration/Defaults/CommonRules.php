@@ -6,6 +6,7 @@ namespace Blumilk\Codestyle\Configuration\Defaults;
 
 use Blumilk\Codestyle\Fixers\CompactEmptyArrayFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
+use Blumilk\Codestyle\Fixers\NamedArgumentFixer;
 use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer;
@@ -74,6 +75,7 @@ use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
 use PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer;
+use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer;
@@ -338,5 +340,7 @@ class CommonRules extends Rules
         NoMultilineWhitespaceAroundDoubleArrowFixer::class => true,
         CompactEmptyArrayFixer::class => true,
         ClassKeywordFixer::class => true,
+        NamedArgumentFixer::class => true,
+        NoBlankLinesAfterPhpdocFixer::class => true,
     ];
 }
