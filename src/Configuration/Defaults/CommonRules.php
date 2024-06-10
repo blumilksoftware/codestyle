@@ -92,7 +92,6 @@ use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitAttributesFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitSetUpTearDownVisibilityFixer;
-use PhpCsFixer\Fixer\PhpUnit\PhpUnitSizeClassFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitTestAnnotationFixer;
 use PhpCsFixer\Fixer\ReturnNotation\NoUselessReturnFixer;
 use PhpCsFixer\Fixer\ReturnNotation\SimplifiedNullReturnFixer;
