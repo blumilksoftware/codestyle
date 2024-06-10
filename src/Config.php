@@ -17,6 +17,8 @@ use Blumilk\Codestyle\Fixers\NoLaravelMigrationsGeneratedCommentFixer;
 use JetBrains\PhpStorm\ArrayShape;
 use PhpCsFixer\Config as PhpCsFixerConfig;
 use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfig;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 use PhpCsFixerCustomFixers\Fixers as PhpCsFixerCustomFixers;
 
 class Config
@@ -27,6 +29,9 @@ class Config
     protected Rules $rules;
     protected string $rootPath;
     protected bool $withRiskyFixers = true;
+    protected bool $withCache = true;
+    protected bool $withParallelRun = true;
+    protected ?ParallelConfig $customParallelRunConfig = null;
     protected bool $ignoreMarkedFiles = false;
 
     public function __construct(
@@ -57,12 +62,18 @@ class Config
         $finder = Finder::create()->directories()->append($filteredFiles);
         $config = new PhpCsFixerConfig("Blumilk codestyle standard");
 
-        return $config->setFinder($finder)
-            ->setUsingCache(false)
+        $config = $config->setFinder($finder)
+            ->setUsingCache($this->withCache)
             ->registerCustomFixers(new PhpCsFixerCustomFixers())
             ->registerCustomFixers($this->getCustomFixers())
             ->setRiskyAllowed($this->withRiskyFixers)
             ->setRules($rules);
+
+        if ($this->withParallelRun) {
+            $config = $config->setParallelConfig($this->withCustomParallelRunConfig ?? ParallelConfigFactory::detect());
+        }
+
+        return $config;
     }
 
     #[ArrayShape(["paths" => "array", "rules" => "array"])]
@@ -81,9 +92,52 @@ class Config
         return $this;
     }
 
+    public function withRiskyFixers(): static
+    {
+        $this->withRiskyFixers = true;
+
+        return $this;
+    }
+
     public function withoutRiskyFixers(): static
     {
         $this->withRiskyFixers = false;
+
+        return $this;
+    }
+
+    public function withCache(): static
+    {
+        $this->withCache = true;
+
+        return $this;
+    }
+
+    public function withoutCache(): static
+    {
+        $this->withCache = false;
+
+        return $this;
+    }
+
+    public function withParallelRun(): static
+    {
+        $this->withParallelRun = true;
+
+        return $this;
+    }
+
+    public function withoutParallelRun(): static
+    {
+        $this->withParallelRun = false;
+
+        return $this;
+    }
+
+    public function withCustomParallelRunConfig(ParallelConfig $config): static
+    {
+        $this->withParallelRun();
+        $this->customParallelRunConfig = $config;
 
         return $this;
     }

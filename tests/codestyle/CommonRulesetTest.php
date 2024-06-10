@@ -5,34 +5,36 @@ declare(strict_types=1);
 namespace Blumilk\Codestyle\Tests;
 
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhp;
 
 class CommonRulesetTest extends CodestyleTestCase
 {
     /**
-     * @dataProvider providePhp80Fixtures
-     * @requires PHP >= 8.0
      * @throws Exception
      */
+    #[DataProvider("providePhp80Fixtures")]
+    #[RequiresPhp(">= 8.0")]
     public function testPhp80Fixtures(string $name): void
     {
         $this->testFixture($name);
     }
 
     /**
-     * @dataProvider providePhp81Fixtures
-     * @requires PHP >= 8.1
      * @throws Exception
      */
+    #[DataProvider("providePhp81Fixtures")]
+    #[RequiresPhp(">= 8.1")]
     public function testPhp81Fixtures(string $name): void
     {
         $this->testFixture($name);
     }
 
     /**
-     * @dataProvider providePhp82Fixtures
-     * @requires PHP >= 8.2
      * @throws Exception
      */
+    #[DataProvider("providePhp82Fixtures")]
+    #[RequiresPhp(">= 8.2")]
     public function testPhp82Fixtures(string $name): void
     {
         $this->testFixture($name);
