@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 Class LowercaseKeywordsTest Extends ObjectOperatorTest
 {
+    public bool $true = TRUE;
+
     PUBLIC function test(): int
     {
         Foreach (range(1, 5) as $item) {
