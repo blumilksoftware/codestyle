@@ -7,7 +7,7 @@ use Blumilk\Codestyle\Tools\ComposerManifestScriptsInitializer;
 use PhpCsFixer\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 
-require_once __DIR__ . "/../autoload.php";
+require_once __DIR__ . "/../../../autoload.php";
 
 if (isset($argv[1])) {
     if ($argv[1] === "init") {
