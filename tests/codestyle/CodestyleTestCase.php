@@ -23,7 +23,6 @@ abstract class CodestyleTestCase extends TestCase
     }
 
     /**
-     * @dataProvider providePhp80Fixtures
      * @throws Exception
      */
     protected function testFixture(string $name): void
