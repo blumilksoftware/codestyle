@@ -5,7 +5,7 @@
   "type": "library",
   "require": {
     "php": "^8.1",
-    "friendsofphp/php-cs-fixer": "^3.58",
+    "friendsofphp/php-cs-fixer": "^3.59",
     "kubawerlos/php-cs-fixer-custom-fixers": "^3.21"
   },
   "require-dev": {
