@@ -6,6 +6,7 @@ namespace Blumilk\Codestyle\Fixers;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerTrait;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -18,7 +19,9 @@ use SplFileInfo;
 
 final class NoCommentFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    public function getConfigurationDefinition(): FixerConfigurationResolver
+    use ConfigurableFixerTrait;
+
+    public function createConfigurationDefinition(): FixerConfigurationResolver
     {
         return new FixerConfigurationResolver([
             (new FixerOptionBuilder("doc_comment", "Docblock comments should be removed."))
