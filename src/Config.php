@@ -9,6 +9,7 @@ use Blumilk\Codestyle\Configuration\Defaults\LaravelPaths;
 use Blumilk\Codestyle\Configuration\Paths;
 use Blumilk\Codestyle\Configuration\Rules;
 use Blumilk\Codestyle\Configuration\Utils\Rule;
+use Blumilk\Codestyle\Fixers\ClassKeywordFixer;
 use Blumilk\Codestyle\Fixers\CompactEmptyArrayFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NamedArgumentFixer;
@@ -175,6 +176,7 @@ class Config
             new NoCommentFixer(),
             new CompactEmptyArrayFixer(),
             new NamedArgumentFixer(),
+            new ClassKeywordFixer(),
         ];
     }
 }
