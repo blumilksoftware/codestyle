@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Blumilk\Codestyle\Fixers;
 
 use PhpCsFixer\Fixer\FixerInterface;
+use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -73,7 +74,9 @@ $baz = "\Exception";
 
     public function getPriority(): int
     {
-        return 33;
+        $fixer = new FullyQualifiedStrictTypesFixer();
+
+        return $fixer->getPriority() + 1;
     }
 
     public function supports(SplFileInfo $file): bool
