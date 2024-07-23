@@ -9,6 +9,7 @@ use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
+use ReflectionClass;
 use SplFileInfo;
 
 final class ClassKeywordFixer implements FixerInterface
@@ -72,7 +73,7 @@ $baz = "\Exception";
 
     public function getPriority(): int
     {
-        return 0;
+        return 33;
     }
 
     public function supports(SplFileInfo $file): bool
@@ -82,10 +83,10 @@ $baz = "\Exception";
 
     private function exists(string $name): bool
     {
-        if (class_exists($name) || interface_exists($name) || trait_exists($name)) {
-            $rc = new \ReflectionClass($name);
+        if (class_exists($name) || interface_exists($name) || trait_exists($name) || enum_exists($name)) {
+            $reflection = new ReflectionClass($name);
 
-            return $rc->getName() === $name;
+            return $reflection->getName() === $name;
         }
 
         return false;
