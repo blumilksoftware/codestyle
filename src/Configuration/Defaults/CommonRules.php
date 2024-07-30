@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Blumilk\Codestyle\Configuration\Defaults;
 
+use Blumilk\Codestyle\Fixers\ClassKeywordFixer;
 use Blumilk\Codestyle\Fixers\CompactEmptyArrayFixer;
 use Blumilk\Codestyle\Fixers\DoubleQuoteFixer;
 use Blumilk\Codestyle\Fixers\NamedArgumentFixer;
@@ -56,7 +57,6 @@ use PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\Import\SingleLineAfterImportsFixer;
-use PhpCsFixer\Fixer\LanguageConstruct\ClassKeywordFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer;
