@@ -113,6 +113,7 @@ use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use PhpCsFixer\Fixer\Whitespace\SpacesInsideParenthesesFixer;
 use PhpCsFixer\Fixer\Whitespace\StatementIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\TypeDeclarationSpacesFixer;
 use PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer;
@@ -346,5 +347,6 @@ class CommonRules extends Rules
         NoBlankLinesAfterPhpdocFixer::class => true,
         ConstantCaseFixer::class => true,
         PhpUnitAttributesFixer::class => true,
+        SpacesInsideParenthesesFixer::class => true,
     ];
 }
