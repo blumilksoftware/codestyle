@@ -10,36 +10,6 @@ use PHPUnit\Framework\Attributes\RequiresPhp;
 
 class CommonRulesetTest extends CodestyleTestCase
 {
-    /**
-     * @throws Exception
-     */
-    #[DataProvider("providePhp80Fixtures")]
-    #[RequiresPhp(">= 8.0")]
-    public function testPhp80Fixtures(string $name): void
-    {
-        $this->testFixture($name);
-    }
-
-    /**
-     * @throws Exception
-     */
-    #[DataProvider("providePhp81Fixtures")]
-    #[RequiresPhp(">= 8.1")]
-    public function testPhp81Fixtures(string $name): void
-    {
-        $this->testFixture($name);
-    }
-
-    /**
-     * @throws Exception
-     */
-    #[DataProvider("providePhp82Fixtures")]
-    #[RequiresPhp(">= 8.2")]
-    public function testPhp82Fixtures(string $name): void
-    {
-        $this->testFixture($name);
-    }
-
     public static function providePhp80Fixtures(): array
     {
         return [
@@ -69,6 +39,7 @@ class CommonRulesetTest extends CodestyleTestCase
             ["compactArray"],
             ["classesImport"],
             ["spacesInsideParentheses"],
+            ["orderedClassElements"],
         ];
     }
 
@@ -85,5 +56,35 @@ class CommonRulesetTest extends CodestyleTestCase
         return [
             ["php82"],
         ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[DataProvider("providePhp80Fixtures")]
+    #[RequiresPhp(">= 8.0")]
+    public function testPhp80Fixtures(string $name): void
+    {
+        $this->testFixture($name);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[DataProvider("providePhp81Fixtures")]
+    #[RequiresPhp(">= 8.1")]
+    public function testPhp81Fixtures(string $name): void
+    {
+        $this->testFixture($name);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[DataProvider("providePhp82Fixtures")]
+    #[RequiresPhp(">= 8.2")]
+    public function testPhp82Fixtures(string $name): void
+    {
+        $this->testFixture($name);
     }
 }
