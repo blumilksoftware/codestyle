@@ -91,4 +91,9 @@ EOF;
             TokenRemover::removeWithLinesIfPossible($tokens, $index);
         }
     }
+
+    public function configure(array $configuration): void
+    {
+        // TODO: Implement configure() method.
+    }
 }
