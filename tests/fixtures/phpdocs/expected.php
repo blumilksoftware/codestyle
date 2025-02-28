@@ -14,4 +14,12 @@ class Stub
     {
         $this->i = $this->i + $i;
     }
+
+    /**
+     * @param int $i
+     */
+    public function remove($i): void
+    {
+        $this->i = $this->i - $i;
+    }
 }
