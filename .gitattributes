@@ -3,5 +3,6 @@
 
 codestyle.php export-ignore
 docker-compose.yml export-ignore
-Makefile export-ignore
 logo.png export-ignore
+Makefile export-ignore
+renovate5.json export-ignore
