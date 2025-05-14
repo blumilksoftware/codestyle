@@ -1,6 +1,6 @@
 services:
   php:
-    image: ghcr.io/blumilksoftware/php:8.3
+    image: ghcr.io/blumilksoftware/php:8.4@sha256:95881b08ea6dc2c908fa30a16af868bf2579a2ffbf7fcaded46556eb9ef21afb
     container_name: blumilk-codestyle-php
     working_dir: /application
     user: ${CURRENT_UID:-1000}
