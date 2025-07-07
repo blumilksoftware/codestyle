@@ -127,7 +127,6 @@ use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocNoSuperfluousParamFixer;
-use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
@@ -280,7 +279,6 @@ class CommonRules extends Rules
         MultilinePromotedPropertiesFixer::class => true,
         NoUselessCommentFixer::class => true,
         PhpdocArrayTypeFixer::class => true,
-        PromotedConstructorPropertyFixer::class => true,
         SingleSpaceAfterStatementFixer::class => true,
         SingleSpaceBeforeStatementFixer::class => true,
         StringableInterfaceFixer::class => true,
