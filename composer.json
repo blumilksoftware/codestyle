@@ -7,7 +7,7 @@
   "require": {
     "php": "^8.3",
     "friendsofphp/php-cs-fixer": "^3.80.0",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^3.29.0"
+    "kubawerlos/php-cs-fixer-custom-fixers": "^3.30.0"
   },
   "require-dev": {
     "jetbrains/phpstorm-attributes": "^1.2",
