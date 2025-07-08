@@ -48,11 +48,13 @@ use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\LambdaNotUsedImportFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
+use PhpCsFixer\Fixer\FunctionNotation\MultilinePromotedPropertiesFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
 use PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\UseArrowFunctionsFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Import\FullyQualifiedStrictTypesFixer;
+use PhpCsFixer\Fixer\Import\GlobalNamespaceImportFixer;
 use PhpCsFixer\Fixer\Import\NoLeadingImportSlashFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
@@ -80,6 +82,7 @@ use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
+use PhpCsFixer\Fixer\Phpdoc\PhpdocArrayTypeFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocNoEmptyReturnFixer;
@@ -119,12 +122,10 @@ use PhpCsFixer\Fixer\Whitespace\StatementIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\TypeDeclarationSpacesFixer;
 use PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer;
 use PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer;
-use PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer;
 use PhpCsFixerCustomFixers\Fixer\NoCommentedOutCodeFixer;
 use PhpCsFixerCustomFixers\Fixer\NoPhpStormGeneratedCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
 use PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer;
-use PhpCsFixerCustomFixers\Fixer\PhpdocArrayStyleFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer;
 use PhpCsFixerCustomFixers\Fixer\PhpdocNoSuperfluousParamFixer;
 use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
@@ -279,8 +280,7 @@ class CommonRules extends Rules
         ConstructorEmptyBracesFixer::class => true,
         MultilinePromotedPropertiesFixer::class => true,
         NoUselessCommentFixer::class => true,
-        PhpdocArrayStyleFixer::class => true,
-        PromotedConstructorPropertyFixer::class => true,
+        PhpdocArrayTypeFixer::class => true,
         SingleSpaceAfterStatementFixer::class => true,
         SingleSpaceBeforeStatementFixer::class => true,
         StringableInterfaceFixer::class => true,
@@ -374,5 +374,11 @@ class CommonRules extends Rules
         PhpUnitAttributesFixer::class => true,
         SpacesInsideParenthesesFixer::class => true,
         PhpdocAlignFixer::class => ["align" => "left"],
+        PromotedConstructorPropertyFixer::class => true,
+        GlobalNamespaceImportFixer::class => [
+            "import_classes" => true,
+            "import_constants" => true,
+            "import_functions" => true,
+        ],
     ];
 }

@@ -1,12 +1,13 @@
 {
   "name": "blumilksoftware/codestyle",
+  "version": "5.0.0",
   "description": "Blumilk codestyle configurator",
   "license": "MIT",
   "type": "library",
   "require": {
-    "php": "^8.2",
-    "friendsofphp/php-cs-fixer": "^3.75.0",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^3.25.0"
+    "php": "^8.3",
+    "friendsofphp/php-cs-fixer": "^3.80.0",
+    "kubawerlos/php-cs-fixer-custom-fixers": "^3.30.0"
   },
   "require-dev": {
     "jetbrains/phpstorm-attributes": "^1.2",
@@ -34,7 +35,7 @@
     }
   },
   "scripts": {
-    "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
+    "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --config codestyle.php",
     "csf": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
     "test": "./vendor/bin/phpunit tests --colors=always",
     "unit": "./vendor/bin/phpunit tests/unit --colors=always",

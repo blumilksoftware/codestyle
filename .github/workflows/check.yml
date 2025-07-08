@@ -9,11 +9,11 @@ on:
 jobs:
   build:
     name: "Checking the package: testing and linting"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     strategy:
       matrix:
-        php: ["8.2", "8.3"]
+        php: ["8.3", "8.4"]
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

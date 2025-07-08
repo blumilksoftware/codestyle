@@ -58,6 +58,13 @@ class CommonRulesetTest extends CodestyleTestCase
         ];
     }
 
+    public static function providePhp84Fixtures(): array
+    {
+        return [
+            ["php84"],
+        ];
+    }
+
     /**
      * @throws Exception
      */
@@ -84,6 +91,16 @@ class CommonRulesetTest extends CodestyleTestCase
     #[DataProvider("providePhp82Fixtures")]
     #[RequiresPhp(">= 8.2")]
     public function testPhp82Fixtures(string $name): void
+    {
+        $this->testFixture($name);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[DataProvider("providePhp84Fixtures")]
+    #[RequiresPhp(">= 8.4")]
+    public function testPhp84Fixtures(string $name): void
     {
         $this->testFixture($name);
     }
