@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 enum Status: String
 {
-    case ACTIVE = "active";
+    case Active = "active";
 }
 enum Priority: Int
 {
-    case HIGH = 1;
+    case High = 1;
 }
