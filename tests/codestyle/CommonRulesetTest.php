@@ -48,6 +48,7 @@ class CommonRulesetTest extends CodestyleTestCase
         return [
             ["enums"],
             ["readonlies"],
+            ["nativeFunctionTypeDeclarations"],
         ];
     }
 

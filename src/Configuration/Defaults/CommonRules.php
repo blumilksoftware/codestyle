@@ -24,6 +24,7 @@ use PhpCsFixer\Fixer\Casing\LowercaseStaticReferenceFixer;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\Casing\MagicMethodCasingFixer;
 use PhpCsFixer\Fixer\Casing\NativeFunctionCasingFixer;
+use PhpCsFixer\Fixer\Casing\NativeTypeDeclarationCasingFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
@@ -368,6 +369,7 @@ class CommonRules extends Rules
         NoMultilineWhitespaceAroundDoubleArrowFixer::class => true,
         CompactEmptyArrayFixer::class => true,
         ClassKeywordFixer::class => true,
+        NativeTypeDeclarationCasingFixer::class => true,
         NamedArgumentFixer::class => true,
         NoBlankLinesAfterPhpdocFixer::class => true,
         ConstantCaseFixer::class => true,

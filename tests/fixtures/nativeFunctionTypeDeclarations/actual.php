@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-enum Status: string
+enum Status: String
 {
     case Active = "active";
-    case Inactive = "inactive";
+}
+enum Priority: Int
+{
+    case High = 1;
 }
