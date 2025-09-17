@@ -1,6 +1,5 @@
 {
   "name": "blumilksoftware/codestyle",
-  "version": "5.0.0",
   "description": "Blumilk codestyle configurator",
   "license": "MIT",
   "type": "library",
