@@ -5,13 +5,13 @@
   "type": "library",
   "require": {
     "php": "^8.3",
-    "friendsofphp/php-cs-fixer": "^3.80.0",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^3.30.0"
+    "friendsofphp/php-cs-fixer": "^3.89.1",
+    "kubawerlos/php-cs-fixer-custom-fixers": "^3.30.2"
   },
   "require-dev": {
     "jetbrains/phpstorm-attributes": "^1.2",
-    "phpunit/phpunit": "^11.5.26",
-    "symfony/console": "^7.3.1"
+    "phpunit/phpunit": "^11.5.43",
+    "symfony/console": "^7.3.5"
   },
   "authors": [
     {
