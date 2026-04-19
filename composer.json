@@ -10,7 +10,7 @@
   },
   "require-dev": {
     "jetbrains/phpstorm-attributes": "^1.2",
-    "phpunit/phpunit": "^11.5.43",
+    "phpunit/phpunit": "^12.5.22",
     "symfony/console": "^7.3.5"
   },
   "authors": [
